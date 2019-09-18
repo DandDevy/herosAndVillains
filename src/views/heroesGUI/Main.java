@@ -20,7 +20,10 @@ public class Main extends Application {
 
 //        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle(TITLE);
-        primaryStage.setScene(new Scene(new MyGUI("add hero", "enter goodness", "#b3ffd9").getPrimaryLayout(), WIDTH, HEIGHT));
+
+        primaryStage.setScene(new Scene(new MyGUI("add hero name", "enter goodness",
+                "#b3ffd9", "generation delay", "addPersonBtnText", "delayBtnText")
+                .getPrimaryLayout(), WIDTH, HEIGHT));
         primaryStage.show();
     }
 
