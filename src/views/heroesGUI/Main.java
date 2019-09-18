@@ -6,7 +6,6 @@ package views.heroesGUI;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import views.MyGUI;
 
@@ -21,7 +20,7 @@ public class Main extends Application {
 
 //        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle(TITLE);
-        primaryStage.setScene(new Scene(new MyGUI("add hero", "enter goodness").getPrimaryLayout(), WIDTH, HEIGHT));
+        primaryStage.setScene(new Scene(new MyGUI("add hero", "enter goodness", "#b3ffd9").getPrimaryLayout(), WIDTH, HEIGHT));
         primaryStage.show();
     }
 
