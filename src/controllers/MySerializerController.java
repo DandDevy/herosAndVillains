@@ -8,6 +8,10 @@ import java.io.*;
 public class MySerializerController {
     private static final String SERIALIZATION_LOCATION = "C:\\Users\\Dashc\\IdeaProjects\\IdeaThirdYearProjects\\distributedSystemProgramming\\herosAndVillains\\herosAndVillains\\src\\common\\";
 
+    /**
+     * Serializes a SuperPerson<SuperHero> hero
+     * @param hero
+     */
     public static void serializeHero(SuperPerson<SuperHero> hero) {
         try {
             FileOutputStream fileOut = new FileOutputStream(SERIALIZATION_LOCATION + "battle-zone-1.ser");
