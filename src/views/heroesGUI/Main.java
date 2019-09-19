@@ -7,7 +7,6 @@ package views.heroesGUI;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import views.MyGUI;
 
 public class Main extends Application {
 
@@ -21,9 +20,14 @@ public class Main extends Application {
 //        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle(TITLE);
 
-        primaryStage.setScene(new Scene(new MyGUI("add hero name", "enter goodness",
-                "#b3ffd9", "generation delay", "addPersonBtnText", "delayBtnText")
-                .getPrimaryLayout(), WIDTH, HEIGHT));
+//        primaryStage.setScene(new Scene(new MyGUI("add hero name", "enter goodness",
+//                "#b3ffd9", "generation delay", "addPersonBtnText", "delayBtnText", "0")
+//                .getPrimaryLayout(), WIDTH, HEIGHT));
+
+        primaryStage.setScene(new Scene(
+                new HeroesGUI().getPrimaryLayout(),
+                WIDTH, HEIGHT
+        ));
         primaryStage.show();
     }
 
