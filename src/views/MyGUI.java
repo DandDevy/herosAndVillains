@@ -135,6 +135,10 @@ public abstract class MyGUI {
         return delayTF;
     }
 
+    /**
+     * returns the delay chosen by the user
+     * @return int delay
+     */
     protected int getDelay(){
         int res = -1;
 

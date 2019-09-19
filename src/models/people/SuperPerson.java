@@ -1,7 +1,9 @@
 package models.people;
 
 
-public class SuperPerson<S> implements Person, SuperHero, SuperVillain{
+import java.io.Serializable;
+
+public class SuperPerson<S> implements Person, SuperHero, SuperVillain, Serializable {
     private String type;
     private String strength;
 
@@ -29,5 +31,13 @@ public class SuperPerson<S> implements Person, SuperHero, SuperVillain{
 
     public void setStrength(String strength) {
         this.strength = strength;
+    }
+
+    @Override
+    public String toString() {
+        return "SuperPerson{" +
+                "type='" + type + '\'' +
+                ", strength='" + strength + '\'' +
+                '}';
     }
 }

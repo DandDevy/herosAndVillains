@@ -1,8 +1,12 @@
 package views.heroesGUI;
 
+import controllers.Controller;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+
 import views.MyGUI;
+
+import static models.factories.PeopleFactory.getHero;
 
 /**
  * <h1>HeroesGUI</h1>
@@ -36,6 +40,9 @@ public class HeroesGUI extends MyGUI {
     private void setButtons(){
         super.getAddSuperPersonBtn().setOnAction(event -> {
             System.out.println("User wishes to add a user!!");
+
+            Controller.addHero(super.getAddSuperPersonTypeTF().getText(), super.getAddSuperPersonStrengthTF().getText());
+
 
         });
 
