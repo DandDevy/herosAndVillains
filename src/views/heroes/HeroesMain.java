@@ -2,16 +2,16 @@
  * Copyright (c) 2019. This was written by Daniel Ashcroft. Use with permission.
  */
 
-package views.heroesGUI;
+package views.heroes;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class HeroesMain extends Application {
 
     private static final int WIDTH = 500;
-    private static final int HEIGHT = 300;
+    private static final int HEIGHT = 180;
     private static final String TITLE = "HEROES - Daniel Ashcroft";
 
     @Override

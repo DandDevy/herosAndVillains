@@ -1,12 +1,10 @@
-package views.heroesGUI;
+package views.heroes;
 
 import controllers.Controller;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
 import views.MyGUI;
-
-import static models.factories.PeopleFactory.getHero;
 
 /**
  * <h1>HeroesGUI</h1>
@@ -17,7 +15,7 @@ public class HeroesGUI extends MyGUI {
 
     private static final String ENTER_YOUR_HERO_TYPE = "enter your hero type";
     private static final String ENTER_YOUR_HERO_STRENGTH = "enter your hero strength";
-    private static final String COLOUR = "#b3ffd9";
+    private static final String COLOUR = "#00ff00";
     private static final String ENTER_YOUR_DELAY_OF_OBSERVING = "enter your delay of observing (s)";
     private static final String ADD_PERSON_BTN_TEXT = "Add hero now";
     private static final String DELAY_BTN_TEXT = "observe for villains at this delay";

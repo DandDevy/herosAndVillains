@@ -2,17 +2,16 @@
  * Copyright (c) 2019. This was written by Daniel Ashcroft. Use with permission.
  */
 
-package views.villainsGUI;
+package views.villains;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class VillainsMain extends Application {
 
     private static final int WIDTH = 500;
-    private static final int HEIGHT = 300;
+    private static final int HEIGHT = 180;
     private static final String TITLE = "VILLAINS - Daniel Ashcroft";
 
     @Override
@@ -20,7 +19,10 @@ public class Main extends Application {
 
 //        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle(TITLE);
-        primaryStage.setScene(new Scene(new VBox(), WIDTH, HEIGHT));
+        primaryStage.setScene(new Scene(
+                new VillainsGUI().getPrimaryLayout(),
+                WIDTH, HEIGHT
+        ));
         primaryStage.show();
     }
 

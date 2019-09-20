@@ -5,7 +5,8 @@ import models.people.SuperHero;
 import models.people.SuperPerson;
 
 public class Controller {
-    private static final String SERIALIZATION_LOCATION = "C:\\Users\\Dashc\\IdeaProjects\\IdeaThirdYearProjects\\distributedSystemProgramming\\herosAndVillains\\herosAndVillains\\src\\common\\";
+    private static final String SERIALIZATION_LOCATION = "src\\common\\"; //reminder: C:\Users\Dashc\IdeaProjects\IdeaThirdYearProjects\distributedSystemProgramming\herosAndVillains\herosAndVillains\
+
     public static void addHero(String type, String strength) {
         SuperPerson<SuperHero> hero = PeopleFactory.getHero(type, strength);
         MySerializerController.serializeHero(hero);
