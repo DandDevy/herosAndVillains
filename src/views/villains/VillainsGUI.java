@@ -38,7 +38,7 @@ public class VillainsGUI extends MyGUI {
         super.getAddSuperPersonBtn().setOnAction(event -> {
             System.out.println("User wishes to add a user!!");
 
-            Controller.addHero(super.getAddSuperPersonTypeTF().getText(), super.getAddSuperPersonStrengthTF().getText());
+            Controller.addVillain(super.getAddSuperPersonTypeTF().getText(), super.getAddSuperPersonStrengthTF().getText());
 
 
         });

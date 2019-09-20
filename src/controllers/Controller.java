@@ -3,6 +3,7 @@ package controllers;
 import models.factories.PeopleFactory;
 import models.people.SuperHero;
 import models.people.SuperPerson;
+import models.people.SuperVillain;
 
 public class Controller {
     private static final String SERIALIZATION_LOCATION = "src\\common\\"; //reminder: C:\Users\Dashc\IdeaProjects\IdeaThirdYearProjects\distributedSystemProgramming\herosAndVillains\herosAndVillains\
@@ -16,5 +17,10 @@ public class Controller {
         MySerializerController.serializeObject(hero, SERIALIZATION_LOCATION + "battle-zone-1.ser");
         SuperPerson<SuperHero> hero3 = (SuperPerson<SuperHero>) MySerializerController.deSerializeObject(SERIALIZATION_LOCATION + "battle-zone-1.ser");
         System.out.println("hero3" + hero3);
+    }
+
+    public static void addVillain(String type, String strength) {
+        SuperPerson<SuperVillain> villain = PeopleFactory.getVillain(type, strength);
+        MySerializerController.serializeObject(villain, SERIALIZATION_LOCATION + "battle-zone-1.ser");
     }
 }

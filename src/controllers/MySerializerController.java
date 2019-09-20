@@ -4,6 +4,7 @@ import models.people.SuperHero;
 import models.people.SuperPerson;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class MySerializerController {
     private static final String SERIALIZATION_LOCATION = "C:\\Users\\Dashc\\IdeaProjects\\IdeaThirdYearProjects\\distributedSystemProgramming\\herosAndVillains\\herosAndVillains\\src\\common\\";
@@ -96,5 +97,48 @@ public class MySerializerController {
         return object;
     }
 
+    /**
+     * Serializes an ArrayList<Object> objects
+     * @param objects
+     */
+    public static void serializeObjects(ArrayList<Object> objects, String location) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(location);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(objects);
+            out.close();
+            fileOut.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Deserialize a  ArrayList<Object> objects
+     * @return objects
+     */
+    public static ArrayList<Object> deSerializeObjects(String location){
+        ArrayList<Object> objects = new ArrayList<Object>();
+        try {
+            FileInputStream fileIn = new FileInputStream(location);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Serializable o = (Serializable) in.readObject();
+            System.out.println("what is inside my serialized file: \n"+o);
+
+            ArrayList<Object> test = (ArrayList<Object>) o;
+
+            objects = test;
+
+            in.close();
+            fileIn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("what list is inside my deserialized file: \n" + objects);
+
+        return objects;
+    }
 
 }
