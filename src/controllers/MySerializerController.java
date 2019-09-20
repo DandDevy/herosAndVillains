@@ -24,6 +24,10 @@ public class MySerializerController {
         }
     }
 
+    /**
+     * Deserialize a  SuperPerson<SuperHero> hero
+     * @return SuperPerson<SuperHero> hero
+     */
     public  static SuperPerson<SuperHero> deSerializeHero(){
         SuperPerson<SuperHero> hero = null;
         try {
@@ -46,6 +50,50 @@ public class MySerializerController {
         System.out.println("what list is inside my deserialized file: \n"+hero);
 
         return hero;
+    }
+
+    /**
+     * Serializes an Object object
+     * @param object
+     */
+    public static void serializeObject(Object object, String location) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(location);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(object);
+            out.close();
+            fileOut.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Deserialize a  Object object
+     * @return Object object
+     */
+    public static Object deSerializeObject(String location){
+        Object object = null;
+        try {
+            FileInputStream fileIn = new FileInputStream(location);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Serializable o = (Serializable) in.readObject();
+            System.out.println("what is inside my serialized file: \n"+o);
+
+            Object test = (Object) o;
+
+            object = test;
+
+            in.close();
+            fileIn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("what list is inside my deserialized file: \n" + object);
+
+        return object;
     }
 
 
