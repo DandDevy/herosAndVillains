@@ -1,6 +1,8 @@
 package models.people;
 
-public interface SuperHero {
+import java.util.Observer;
+
+public interface SuperHero extends Observer {
 
 
 

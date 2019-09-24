@@ -5,6 +5,8 @@ import models.people.SuperHero;
 import models.people.SuperPerson;
 import models.people.SuperVillain;
 
+import java.util.Observer;
+
 /**
  * <h1>PeopleFactory</h1>
  * <p>The people you can generate are Person, SuperPerson, SuperHero and SuperVillain</p>
@@ -47,7 +49,7 @@ public class PeopleFactory {
      * @param strength
      * @return SuperPerson
      */
-    public static SuperPerson getSuperPerson(String type, String strength){
-        return new SuperPerson(type, strength);
+    public static SuperPerson<SuperPerson> getSuperPerson(String type, String strength){
+        return new SuperPerson<SuperPerson>(type, strength);
     }
 }

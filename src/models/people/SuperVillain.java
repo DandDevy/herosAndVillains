@@ -1,6 +1,8 @@
 package models.people;
 
-public interface SuperVillain {
+import java.util.Observer;
+
+public interface SuperVillain extends Observer {
 
     String getType();
 
@@ -12,6 +14,6 @@ public interface SuperVillain {
     void setStrength(String strength);
 
 
-    void update();
+    void update(SuperPerson<Observer> villain);
 
 }
