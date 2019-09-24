@@ -45,6 +45,7 @@ public class VillainsGUI extends MyGUI {
 
         super.getDelayBtn().setOnAction(event -> {
             System.out.println("User wishes to generate at " + super.getDelay() + " seconds");
+            Controller.generateVillain(super.getDelay());
         });
     }
 
