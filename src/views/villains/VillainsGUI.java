@@ -17,8 +17,8 @@ public class VillainsGUI extends MyGUI {
     private static final String COLOUR = "#ff0000";
     private static final String ENTER_YOUR_DELAY_OF_GENERATING = "enter your delay of generating (s)";
     private static final String ADD_PERSON_BTN_TEXT = "Add villain now";
-    private static final String DELAY_BTN_TEXT = "Generate people and villains at this delay";
-    private static final String DEFAULT_DELAY = "0";
+    private static final String DELAY_BTN_TEXT = "Or generate at this delay";
+    private static final String DEFAULT_DELAY = "1";
     private Button addHeroBtn, observingDelayBtn;
 
     public VillainsGUI() {
@@ -45,7 +45,7 @@ public class VillainsGUI extends MyGUI {
 
         super.getDelayBtn().setOnAction(event -> {
             System.out.println("User wishes to generate at " + super.getDelay() + " seconds");
-            Controller.generateVillain(super.getDelay());
+            Controller.generateVillain(super.getDelay(),super.getAddSuperPersonTypeTF().getText(), super.getAddSuperPersonStrengthTF().getText());
         });
     }
 

@@ -4,14 +4,13 @@ import models.factories.PeopleFactory;
 import models.people.SuperHero;
 import models.people.SuperVillain;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Controller {
     private static final String SERIALIZATION_LOCATION = "src\\common\\"; //reminder: C:\Users\Dashc\IdeaProjects\IdeaThirdYearProjects\distributedSystemProgramming\herosAndVillains\herosAndVillains\
-    private static final String SERIALIZATION_BATTLE_FOLDER_NAME = "battle-zone-";
-    private static final String SERIALIZATION_fILE_NAME_ENDING = ".ser";
-    private static final int BATTLE_FILE_NUMBER = 1;
+    private static final String FOLDER = SERIALIZATION_LOCATION + "battle-zone-";
+    private static final String SER_fILE_ENDING = ".ser";
+    private static int battleFileNumber = 0;
 
     public static void addHero(String type, String strength) {
         SuperHero hero = PeopleFactory.getHero(type, strength);
@@ -26,20 +25,18 @@ public class Controller {
 
     public static void addVillain(String type, String strength) {
         SuperVillain villain = PeopleFactory.getVillain(type, strength);
-        ArrayList people = MySerializerController.deSerializeObjects(SERIALIZATION_LOCATION + SERIALIZATION_BATTLE_FOLDER_NAME
-                + BATTLE_FILE_NUMBER + SERIALIZATION_fILE_NAME_ENDING);
 
-        people.add(villain);
-        MySerializerController.serializeObject(people,
-                SERIALIZATION_LOCATION + SERIALIZATION_BATTLE_FOLDER_NAME
-                        + BATTLE_FILE_NUMBER + SERIALIZATION_fILE_NAME_ENDING
-        );
+        MySerializerController.serializeObject(villain, FOLDER + getBattleFileNumberUpdated() + SER_fILE_ENDING);
         System.out.println(villain + " has been serialized");
     }
 
-    public static void generateVillain(int delay) {
+    public static synchronized int getBattleFileNumberUpdated(){
+        return battleFileNumber++;
+    }
+
+    public static void generateVillain(int delay, String type, String strength) {
         while (true){
-            addVillain("strong", "fire");
+            addVillain(type, strength);
             try {
                 TimeUnit.SECONDS.sleep(delay);
             } catch (InterruptedException e) {
