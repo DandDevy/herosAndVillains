@@ -1,22 +1,36 @@
 package models.people;
 
-import java.util.Observer;
+import java.io.Serializable;
 
-public interface SuperHero extends Observer {
+public class SuperHero implements Serializable, SuperPerson {
+    private String type;
+    private String strength;
 
+    public SuperHero(String type, String strength) {
+        this.type = type;
+        this.strength = strength;
+    }
+    public String getType() {
+        return type;
+    }
 
+    public void setType(String type) {
+        this.type = type;
+    }
 
-    String getType();
+    public String getStrength() {
+        return strength;
+    }
 
-    void setType(String type);
+    public void setStrength(String strength) {
+        this.strength = strength;
+    }
 
-
-    String getStrength();
-
-    void setStrength(String strength);
-
-
-    void update();
-
-
+    @Override
+    public String toString() {
+        return "SuperHero{" +
+                "type='" + type + '\'' +
+                ", strength='" + strength + '\'' +
+                '}';
+    }
 }
