@@ -1,6 +1,9 @@
 package models.people;
 
+import controllers.Controller;
+
 import java.io.Serializable;
+import java.nio.file.Path;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -57,7 +60,18 @@ public class SuperHero implements Serializable, SuperPerson, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("updated: " + this);
+        System.out.println("update: " + this);
+
+        try {
+            SuperVillain villain = (SuperVillain) o;
+            Path eventpath = (Path) arg;
+
+            SuperHero hero = Controller.getHeroForVillain(villain);
+
+            Controller.defeatVillain(eventpath, hero, villain);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**

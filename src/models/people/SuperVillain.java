@@ -53,7 +53,6 @@ public class SuperVillain extends Observable implements Serializable, SuperPerso
         this.strength = strength;
     }
 
-
     @Override
     public String toString() {
         return "SuperVillain{" +

@@ -4,6 +4,7 @@ import models.factories.PeopleFactory;
 import models.people.SuperHero;
 import models.people.SuperVillain;
 
+import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 
 public class Controller {
@@ -47,5 +48,36 @@ public class Controller {
 
     public static void observe(int delay) {
         WatcherController.watch(SERIALIZATION_LOCATION, delay);
+    }
+
+    public static SuperHero getHeroForVillain(SuperVillain villain) {
+        return PeopleFactory.getHero(villain.getType(), villain.getStrength());
+    }
+
+    /**
+     * <p>get villain from common folder</p>
+     * @param eventpath
+     * @return
+     */
+    private static SuperVillain getVillain(Path eventpath) {
+        return (SuperVillain) MySerializerController.deSerializeObject(eventpath.toString());
+    }
+
+
+    public static void dealWithVillain(Path eventpath) {
+        SuperVillain villain = getVillain(eventpath);
+
+        System.out.println("villain : " + villain);
+
+        SuperHero hero = getHeroForVillain(villain);
+
+        villain.notifyObservers(eventpath);
+//        hero.update(villain, eventpath);
+//        defeatVillain(eventpath);
+//        removeFile(eventpath);
+    }
+
+    public static void defeatVillain(Path eventpath, SuperHero hero, SuperVillain villain) {
+
     }
 }

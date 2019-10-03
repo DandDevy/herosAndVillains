@@ -52,7 +52,9 @@ public class WatcherController {
 
                     System.out.println("WATCHER ANNOUNCEMENT: " + myEventDir + "   " + kind + "   " +  eventpath);
 
-                    DefeatVillainController.dealWithVillain(eventpath);
+
+//                    DefeatVillainController.dealWithVillain(eventpath);
+                    Controller.dealWithVillain(eventpath);
                 }
 
                 TimeUnit.SECONDS.sleep(delay);
