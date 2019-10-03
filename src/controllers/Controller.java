@@ -46,6 +46,6 @@ public class Controller {
     }
 
     public static void observe(int delay) {
-
+        WatcherController.watch(SERIALIZATION_LOCATION, delay);
     }
 }
