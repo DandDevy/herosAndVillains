@@ -45,7 +45,8 @@ public class HeroesGUI extends MyGUI {
         });
 
         super.getDelayBtn().setOnAction(event -> {
-            System.out.println("User wishes to generate at " + super.getDelay() + " seconds");
+            System.out.println("User wishes to observe at " + super.getDelay() + " seconds");
+            Controller.observe(super.getDelay());
         });
     }
 

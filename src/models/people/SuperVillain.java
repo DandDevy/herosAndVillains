@@ -1,12 +1,13 @@
 package models.people;
 
 import java.io.Serializable;
+import java.util.Observable;
 
 /**
  * <h1>SuperVillain</h1>
  * <p>Super villain is just an implementation of SuperPerson</p>
  */
-public class SuperVillain implements Serializable, SuperPerson {
+public class SuperVillain extends Observable implements Serializable, SuperPerson {
     private String type;
     private String strength;
 

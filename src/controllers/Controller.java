@@ -44,4 +44,8 @@ public class Controller {
             }
         }
     }
+
+    public static void observe(int delay) {
+
+    }
 }

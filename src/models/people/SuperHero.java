@@ -1,14 +1,17 @@
 package models.people;
 
 import java.io.Serializable;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * <h1>SuperHero</h1>
  * <p>SuperHero is just an implementation of SuperPerson</p>
  */
-public class SuperHero implements Serializable, SuperPerson {
+public class SuperHero implements Serializable, SuperPerson, Observer {
     private String type;
     private String strength;
+    private String villainLocation;
 
     /**
      * <p>You need a type and strength for a SuperHero</p>
@@ -53,10 +56,32 @@ public class SuperHero implements Serializable, SuperPerson {
     }
 
     @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("updated: " + this);
+    }
+
+    /**
+     * <p>Gets the location of the villain the hero is after</p>
+     * @return
+     */
+    public String getVillainLocation() {
+        return villainLocation;
+    }
+
+    /**
+     * <p>Sets the location of the villain the hero is after</p>
+     * @param villainLocation
+     */
+    public void setVillainLocation(String villainLocation) {
+        this.villainLocation = villainLocation;
+    }
+
+    @Override
     public String toString() {
         return "SuperHero{" +
                 "type='" + type + '\'' +
                 ", strength='" + strength + '\'' +
+                ", villainLocation='" + villainLocation + '\'' +
                 '}';
     }
 }
