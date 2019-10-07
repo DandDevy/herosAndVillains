@@ -6,12 +6,12 @@ package models.people;
  */
 public class GoodFlyPerson extends SuperHero{
     /**
-     * <p>You need a type and strength for a SuperHero</p>
-     *
-     * @param type
+     * <p>You need a strength for a SuperHero</p>
+
      * @param strength
      */
-    public GoodFlyPerson(String type, String strength) {
-        super(type, strength);
+    public GoodFlyPerson(String strength) {
+        super(strength);
     }
+
 }

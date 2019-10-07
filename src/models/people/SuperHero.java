@@ -12,34 +12,15 @@ import java.util.Observer;
  * <p>SuperHero is just an implementation of SuperPerson</p>
  */
 public class SuperHero implements Serializable, SuperPerson, Observer {
-    private String type;
     private String strength;
     private String villainLocation;
 
     /**
-     * <p>You need a type and strength for a SuperHero</p>
-     * @param type
+     * <p>You need strength for a SuperHero</p>
      * @param strength
      */
-    public SuperHero(String type, String strength) {
-        this.type = type;
+    public SuperHero(String strength) {
         this.strength = strength;
-    }
-
-    /**
-     * <p>get the type of the SuperHero.</p>
-     * @return String type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * <p>Set the type of the SuperHero</p>
-     * @param String type
-     */
-    public void setType(String type) {
-        this.type = type;
     }
 
     /**
@@ -93,7 +74,6 @@ public class SuperHero implements Serializable, SuperPerson, Observer {
     @Override
     public String toString() {
         return "SuperHero{" +
-                "type='" + type + '\'' +
                 ", strength='" + strength + '\'' +
                 ", villainLocation='" + villainLocation + '\'' +
                 '}';

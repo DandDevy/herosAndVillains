@@ -45,7 +45,7 @@ public class HeroesGUI extends MyGUI {
             if(getAddSuperPersonTypeSting() == "v1"){
                 heroType = "Strong";
             }else {
-                heroType = "fly";
+                heroType = "Fly";
             }
             Controller.addHero(heroType, super.getAddSuperPersonStrengthTF().getText());
 

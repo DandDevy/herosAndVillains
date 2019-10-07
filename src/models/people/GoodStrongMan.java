@@ -7,11 +7,9 @@ package models.people;
 public class GoodStrongMan extends SuperHero{
     /**
      * <p>You need a type and strength for a SuperHero</p>
-     *
-     * @param type
      * @param strength
      */
-    public GoodStrongMan(String type, String strength) {
-        super(type, strength);
+    public GoodStrongMan( String strength) {
+        super(strength);
     }
 }
