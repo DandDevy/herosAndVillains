@@ -2,9 +2,7 @@ package views;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -23,24 +21,37 @@ public abstract class MyGUI {
 
     private TextField delayTF;
 
-    private Button addSuperPersonBtn, delayBtn;
+    private RadioButton personVersion1;
+    private RadioButton personVersion2;
+    private Button addSuperPersonBtn;
+    private Button delayBtn;
 
     private static final int PRIMARY_LAYOUT_SPACING = 10;
     private static final int SECONDARY_LAYOUT_SPACING = 4;
     private static final int PRIMARY_LAYOUT_FULL_PADDING = 10;
 
-    protected MyGUI(String addPersonLabelTypeText, String addPersonLabelStrengthText, String colour, String delayLabelText, String addPersonBtnText, String delayBtnText, String defaultDelay) {
+    protected MyGUI(String addPersonLabelTypeText, String personTypeV1, String personTypeV2, String addPersonLabelStrengthText, String colour, String delayLabelText, String addPersonBtnText, String delayBtnText, String defaultDelay) {
 
         //the primary layout is the layout of layout. The top of the tree.
         primaryLayout = new HBox(PRIMARY_LAYOUT_SPACING);
 
         //the add Person section allows the user to add a person on the fly
-        //It takes data attributes that are for the person
+        //It takes versions that are for the person
 
-        //name
+        //type
         addPersonLabel = new Label(addPersonLabelTypeText);
         setMyLabelBackground(addPersonLabel);
         addSuperPersonTypeTF = new TextField();
+
+        //toggle group different kind of people
+        ToggleGroup personToggleGrp = new ToggleGroup();
+
+        personVersion1 = new RadioButton(personTypeV1);
+        personVersion1.setToggleGroup(personToggleGrp);
+        personVersion1.setSelected(true);
+
+        personVersion2 = new RadioButton(personTypeV2);
+        personVersion2.setToggleGroup(personToggleGrp);
 
         //strength
         addPersonLabelStrength = new Label(addPersonLabelStrengthText);
@@ -55,7 +66,8 @@ public abstract class MyGUI {
         addPersonVbox = new VBox(SECONDARY_LAYOUT_SPACING);
         addPersonVbox.getChildren().addAll(
                 addPersonLabel,
-                addSuperPersonTypeTF,
+                personVersion1,
+                personVersion2,
                 addPersonLabelStrength,
                 addSuperPersonStrengthTF,
                 addSuperPersonBtn

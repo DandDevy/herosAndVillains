@@ -14,6 +14,8 @@ public class VillainsGUI extends MyGUI {
 
     private static final String ENTER_YOUR_VILLAIN_TYPE = "enter your villain type";
     private static final String ENTER_YOUR_VILLAIN_STRENGTH = "enter your villain strength";
+    private static final String STRONG_VILLAIN = "STRONG VILLAIN";
+    private static final String FLYING_VILLAIN = "FLYING VILLAIN";
     private static final String COLOUR = "#ff0000";
     private static final String ENTER_YOUR_DELAY_OF_GENERATING = "enter your delay of generating (s)";
     private static final String ADD_PERSON_BTN_TEXT = "Add villain now";
@@ -23,7 +25,7 @@ public class VillainsGUI extends MyGUI {
 
     public VillainsGUI() {
         super(
-                ENTER_YOUR_VILLAIN_TYPE, ENTER_YOUR_VILLAIN_STRENGTH, COLOUR,
+                ENTER_YOUR_VILLAIN_TYPE, STRONG_VILLAIN, FLYING_VILLAIN, ENTER_YOUR_VILLAIN_STRENGTH, COLOUR,
                 ENTER_YOUR_DELAY_OF_GENERATING, ADD_PERSON_BTN_TEXT,
                 DELAY_BTN_TEXT, DEFAULT_DELAY
         );

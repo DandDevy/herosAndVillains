@@ -13,8 +13,10 @@ import views.MyGUI;
 public class HeroesGUI extends MyGUI {
 
 
-    private static final String ENTER_YOUR_HERO_TYPE = "enter your hero type";
+    private static final String ENTER_YOUR_HERO_TYPE = "pick your hero type";
     private static final String ENTER_YOUR_HERO_STRENGTH = "enter your hero strength";
+    private static final String STONG_HERO = "STRONG HERO";
+    private static final String FLY_HERO = "FLYING HERO";
     private static final String COLOUR = "#00ff00";
     private static final String ENTER_YOUR_DELAY_OF_OBSERVING = "enter your delay of observing (s)";
     private static final String ADD_PERSON_BTN_TEXT = "Add hero now";
@@ -24,7 +26,7 @@ public class HeroesGUI extends MyGUI {
 
     public HeroesGUI() {
         super(
-                ENTER_YOUR_HERO_TYPE, ENTER_YOUR_HERO_STRENGTH, COLOUR,
+                ENTER_YOUR_HERO_TYPE,STONG_HERO, FLY_HERO, ENTER_YOUR_HERO_STRENGTH, COLOUR,
                 ENTER_YOUR_DELAY_OF_OBSERVING, ADD_PERSON_BTN_TEXT,
                 DELAY_BTN_TEXT, DEFAULT_DELAY
         );
