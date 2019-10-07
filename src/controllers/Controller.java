@@ -1,6 +1,8 @@
 package controllers;
 
 import models.factories.PeopleFactory;
+import models.people.BadFlyPerson;
+import models.people.BadStrongMan;
 import models.people.SuperHero;
 import models.people.SuperVillain;
 
@@ -51,7 +53,22 @@ public class Controller {
     }
 
     public static SuperHero getHeroForVillain(SuperVillain villain) {
-        return PeopleFactory.getHero(villain.getType(), villain.getStrength());
+        String villainType = "Strong";
+        try {
+            BadFlyPerson badFlyPerson = (BadFlyPerson) villain;
+            villainType = "Fly";
+            System.out.println("This is a BadFlyPerson <--" + villain);
+        } catch (Exception e){
+            System.out.println("not a BadFlyPerson <--" + villain);
+        }
+        try {
+            BadStrongMan badStrongMan = (BadStrongMan) villain;
+            villainType = "Strong";
+            System.out.println("This is a BadStrongMan <--" + villain);
+        } catch (Exception e){
+            System.out.println("not a BadStrongMan <--" + villain);
+        }
+        return PeopleFactory.getHero(villainType, villain.getStrength());
     }
 
     /**

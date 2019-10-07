@@ -18,21 +18,26 @@ public abstract class PeopleFactory {
     public static SuperHero getHero(String type, String strength){
         SuperHero hero = null;
 
-        if(type == "Strong")
+        if(type.equals("Strong"))
             hero = new GoodStrongMan(strength);
 
-        else if (type == "Fly")
+        else if (type.equals("Fly"))
             hero = new GoodFlyPerson(strength);
         return hero;
     }
 
     /**
      * Generates and returns a new SuperVillain
-     * @param type
      * @param strength
      * @return SuperVillain
      */
     public static SuperVillain getVillain(String type, String strength){
-        return new  SuperVillain(type, strength);
+        SuperVillain villain = null;
+        if(type.equals("Strong"))
+            villain = new BadStrongMan(strength);
+
+        else if (type.equals("Fly"))
+            villain = new BadFlyPerson(strength);
+        return villain;
     }
 }

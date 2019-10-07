@@ -23,7 +23,7 @@ public class DefeatVillainController {
     }
 
     private static SuperHero getHeroForVillain(SuperVillain villain) {
-        return PeopleFactory.getHero(villain.getType(), villain.getStrength());
+        return PeopleFactory.getHero("villain.getType()", villain.getStrength());
     }
 
     private static SuperVillain getVillain(Path eventpath) {

@@ -8,33 +8,14 @@ import java.util.Observable;
  * <p>Super villain is just an implementation of SuperPerson</p>
  */
 public class SuperVillain extends Observable implements Serializable, SuperPerson {
-    private String type;
     private String strength;
 
     /**
-     * <p>You need a type and strength for a villain</p>
-     * @param type
+     * <p>You need strength for a villain</p>
      * @param strength
      */
-    public SuperVillain(String type, String strength) {
-        this.type = type;
+    public SuperVillain( String strength) {
         this.strength = strength;
-    }
-
-    /**
-     * <p>get the type of the villain.</p>
-     * @return String type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * <p>Set the type of the villain</p>
-     * @param String type
-     */
-    public void setType(String type) {
-        this.type = type;
     }
 
     /**
@@ -56,8 +37,7 @@ public class SuperVillain extends Observable implements Serializable, SuperPerso
     @Override
     public String toString() {
         return "SuperVillain{" +
-                "type='" + type + '\'' +
-                ", strength='" + strength + '\'' +
+                " strength='" + strength + '\'' +
                 '}';
     }
 

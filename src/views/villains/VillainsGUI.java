@@ -44,7 +44,7 @@ public class VillainsGUI extends MyGUI {
             if(getAddSuperPersonTypeSting() == "v1"){
                 villainType = "Strong";
             }else {
-                villainType = "fly";
+                villainType = "Fly";
             }
             Controller.addVillain(villainType, super.getAddSuperPersonStrengthTF().getText());
 
@@ -56,7 +56,7 @@ public class VillainsGUI extends MyGUI {
             if(getAddSuperPersonTypeSting() == "v1"){
                 villainType = "Strong";
             }else {
-                villainType = "fly";
+                villainType = "Fly";
             }
             System.out.println("User wishes to generate at " + super.getDelay() + " seconds");
             Controller.generateVillain(super.getDelay(),villainType, super.getAddSuperPersonStrengthTF().getText());
