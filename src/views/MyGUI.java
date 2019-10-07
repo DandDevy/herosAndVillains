@@ -15,7 +15,6 @@ public abstract class MyGUI {
     private HBox primaryLayout;
 
     private Label addPersonLabel, addPersonLabelStrength, delayLabel;
-    private TextField addSuperPersonTypeTF;
 
     private TextField addSuperPersonStrengthTF;
 
@@ -41,7 +40,6 @@ public abstract class MyGUI {
         //type
         addPersonLabel = new Label(addPersonLabelTypeText);
         setMyLabelBackground(addPersonLabel);
-        addSuperPersonTypeTF = new TextField();
 
         //toggle group different kind of people
         ToggleGroup personToggleGrp = new ToggleGroup();
@@ -124,11 +122,14 @@ public abstract class MyGUI {
     }
 
     /**
-     * returns a textfield of the add hero person type
+     * returns a string of the add hero person version type
      * @return
      */
-    public TextField getAddSuperPersonTypeTF(){
-        return addSuperPersonTypeTF;
+    public String getAddSuperPersonTypeSting(){
+        if(personVersion1.isSelected())
+            return "v1";
+        else
+            return "v2";
     }
 
     /**

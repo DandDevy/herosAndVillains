@@ -40,14 +40,26 @@ public class VillainsGUI extends MyGUI {
         super.getAddSuperPersonBtn().setOnAction(event -> {
             System.out.println("User wishes to add a user!!");
 
-            Controller.addVillain(super.getAddSuperPersonTypeTF().getText(), super.getAddSuperPersonStrengthTF().getText());
+            String villainType;
+            if(getAddSuperPersonTypeSting() == "v1"){
+                villainType = "Strong";
+            }else {
+                villainType = "fly";
+            }
+            Controller.addVillain(villainType, super.getAddSuperPersonStrengthTF().getText());
 
 
         });
 
         super.getDelayBtn().setOnAction(event -> {
+            String villainType;
+            if(getAddSuperPersonTypeSting() == "v1"){
+                villainType = "Strong";
+            }else {
+                villainType = "fly";
+            }
             System.out.println("User wishes to generate at " + super.getDelay() + " seconds");
-            Controller.generateVillain(super.getDelay(),super.getAddSuperPersonTypeTF().getText(), super.getAddSuperPersonStrengthTF().getText());
+            Controller.generateVillain(super.getDelay(),villainType, super.getAddSuperPersonStrengthTF().getText());
         });
     }
 

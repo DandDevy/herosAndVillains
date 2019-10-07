@@ -41,7 +41,13 @@ public class HeroesGUI extends MyGUI {
         super.getAddSuperPersonBtn().setOnAction(event -> {
             System.out.println("User wishes to add a user!!");
 
-            Controller.addHero(super.getAddSuperPersonTypeTF().getText(), super.getAddSuperPersonStrengthTF().getText());
+            String heroType;
+            if(getAddSuperPersonTypeSting() == "v1"){
+                heroType = "Strong";
+            }else {
+                heroType = "fly";
+            }
+            Controller.addHero(heroType, super.getAddSuperPersonStrengthTF().getText());
 
 
         });

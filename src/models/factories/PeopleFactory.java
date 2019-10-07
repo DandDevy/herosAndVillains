@@ -1,6 +1,7 @@
 package models.factories;
 
 
+import models.people.GoodStrongMan;
 import models.people.SuperHero;
 import models.people.SuperPerson;
 import models.people.SuperVillain;
@@ -18,6 +19,10 @@ public class PeopleFactory {
      * @return SuperHero
      */
     public static SuperHero getHero(String type, String strength){
+        SuperHero hero = null;
+
+//        if(type == "Strong")
+//            hero = new GoodStrongMan()
         return new SuperHero(type, strength);
     }
 
