@@ -1,14 +1,21 @@
 package models.people;
 
+import models.util.Observable;
+import models.util.Observer;
+
 import java.io.Serializable;
-import java.util.Observable;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * <h1>SuperVillain</h1>
  * <p>Super villain is just an implementation of SuperPerson</p>
  */
-public class SuperVillain extends Observable implements Serializable, SuperPerson {
+public class SuperVillain implements Observable, Serializable, SuperPerson {
     private String strength;
+    private List<Observer> observerList;
+    //add a path so hero when update can find it
 
     /**
      * <p>You need strength for a villain</p>
@@ -16,6 +23,7 @@ public class SuperVillain extends Observable implements Serializable, SuperPerso
      */
     public SuperVillain( String strength) {
         this.strength = strength;
+        observerList = new ArrayList<Observer>();
     }
 
     /**
@@ -41,4 +49,24 @@ public class SuperVillain extends Observable implements Serializable, SuperPerso
                 '}';
     }
 
+    @Override
+    public void registerObserver(Observer observer) {
+        if(observer != null){
+            this.observerList.add(observer);
+        }
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(Observer observer : observerList){
+            observer.update(this);
+        }
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        if(observer != null){
+            this.observerList.remove(observer);
+        }
+    }
 }

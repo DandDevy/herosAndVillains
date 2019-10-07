@@ -1,11 +1,11 @@
 package models.people;
 
 import controllers.Controller;
+import models.util.Observer;
 
 import java.io.Serializable;
 import java.nio.file.Path;
 import java.util.Observable;
-import java.util.Observer;
 
 /**
  * <h1>SuperHero</h1>
@@ -39,16 +39,16 @@ public class SuperHero implements Serializable, SuperPerson, Observer {
         this.strength = strength;
     }
 
-    @Override
+//    @Override
     public void update(Observable o, Object arg) {
         System.out.println("update: " + this);
 
         try {
-            SuperVillain villain = (SuperVillain) o;
+            SuperVillain villain = new SuperVillain("asd");//(SuperVillain) o;
             Path eventpath = (Path) arg;
 
             SuperHero hero = Controller.getHeroForVillain(villain);
-
+//
             Controller.defeatVillain(eventpath, hero, villain);
         } catch (Exception e){
             e.printStackTrace();
@@ -77,5 +77,10 @@ public class SuperHero implements Serializable, SuperPerson, Observer {
                 ", strength='" + strength + '\'' +
                 ", villainLocation='" + villainLocation + '\'' +
                 '}';
+    }
+
+    @Override
+    public void update(SuperVillain superVillain) {
+
     }
 }
