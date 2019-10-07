@@ -54,11 +54,13 @@ public class WatcherController {
 
 
 //                    DefeatVillainController.dealWithVillain(eventpath);
-                    Controller.dealWithVillain(eventpath);
+//                    if(kind == StandardWatchEventKinds.ENTRY_CREATE)
+//                        Controller.dealWithVillain(eventpath);
                 }
 
+                watchKey.reset();
                 TimeUnit.SECONDS.sleep(delay);
-            } while (watchKey.reset());
+            } while (true);// watchKey.reset() inside
 
 
         } catch (IOException | InterruptedException e) {

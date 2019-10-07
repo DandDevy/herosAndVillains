@@ -57,7 +57,7 @@ public class MySerializerController {
      * Serializes an Object object
      * @param object
      */
-    public static void serializeObject(Object object, String location) {
+    public synchronized static void serializeObject(Object object, String location) {
         try {
             FileOutputStream fileOut = new FileOutputStream(location);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -73,7 +73,7 @@ public class MySerializerController {
      * Deserialize a  Object object
      * @return Object object
      */
-    public static Object deSerializeObject(String location){
+    public synchronized static Object deSerializeObject(String location){
         Object object = null;
         try {
             FileInputStream fileIn = new FileInputStream(location);
