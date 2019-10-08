@@ -50,12 +50,13 @@ public class WatcherController {
 
                     Path eventpath = (Path) event.context();
 
-                    System.out.println("WATCHER ANNOUNCEMENT: " + myEventDir + "   " + kind + "   " +  eventpath);
+//                    System.out.println("WATCHER ANNOUNCEMENT: " + myEventDir + "   " + kind + "   " +  eventpath);
 
 
 //                    DefeatVillainController.dealWithVillain(eventpath);
-//                    if(kind == StandardWatchEventKinds.ENTRY_CREATE)
-//                        Controller.dealWithVillain(eventpath);
+                    if(kind == StandardWatchEventKinds.ENTRY_CREATE)
+                        System.out.println("villain here ->>" + event);
+                        Controller.dealWithVillain(eventpath);
                 }
 
                 watchKey.reset();

@@ -16,7 +16,8 @@ public class DefeatVillainController {
 
         SuperHero hero = getHeroForVillain(villain);
 
-        villain.notifyObservers(eventpath);
+//        villain.notifyObservers(eventpath);
+        villain.notifyObservers();
 //        hero.update(villain, eventpath);
         defeatVillain(eventpath);
         removeFile(eventpath);

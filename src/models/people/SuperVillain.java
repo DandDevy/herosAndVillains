@@ -4,6 +4,7 @@ import models.util.Observable;
 import models.util.Observer;
 
 import java.io.Serializable;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
 public class SuperVillain implements Observable, Serializable, SuperPerson {
     private String strength;
     private List<Observer> observerList;
-    //add a path so hero when update can find it
+    private Path path;
 
     /**
      * <p>You need strength for a villain</p>
@@ -68,5 +69,21 @@ public class SuperVillain implements Observable, Serializable, SuperPerson {
         if(observer != null){
             this.observerList.remove(observer);
         }
+    }
+
+    /**
+     * <p>Get the path for this villain. Which battle zone</p>
+     * @return path
+     */
+    public Path getPath() {
+        return path;
+    }
+
+    /**
+     * <p>Set the path of the villain.</p>
+     * @param path
+     */
+    public void setPath(Path path) {
+        this.path = path;
     }
 }

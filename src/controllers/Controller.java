@@ -77,16 +77,19 @@ public class Controller {
      * @return
      */
     private static SuperVillain getVillain(Path eventpath) {
-        return (SuperVillain) MySerializerController.deSerializeObject(eventpath.toString());
+        return (SuperVillain) MySerializerController.deSerializeObject(SERIALIZATION_LOCATION + eventpath.toString());
     }
 
 
     public static void dealWithVillain(Path eventpath) {
         SuperVillain villain = getVillain(eventpath);
+        villain.setPath(eventpath);
 
         System.out.println("villain : " + villain);
 
         SuperHero hero = getHeroForVillain(villain);
+        villain.registerObserver(hero);
+        villain.notifyObservers();
 
 //        villain.notifyObservers(eventpath);
 //        hero.update(villain, eventpath);
