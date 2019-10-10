@@ -54,7 +54,7 @@ public class MySerializerController {
     }
 
     /**
-     * Serializes an Object object
+     * Serializes an Object objecta
      * @param object
      */
     public synchronized static void serializeObject(Object object, String location) {

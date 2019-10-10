@@ -6,6 +6,7 @@ import models.people.BadStrongMan;
 import models.people.SuperHero;
 import models.people.SuperVillain;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 
@@ -77,13 +78,28 @@ public class Controller {
      * @return
      */
     private static SuperVillain getVillain(Path eventpath) {
-        return (SuperVillain) MySerializerController.deSerializeObject(SERIALIZATION_LOCATION + eventpath.toString());
+        System.out.println("SERIALIZATION_LOCATION + eventpath.toString():  " + SERIALIZATION_LOCATION + eventpath.toString());
+        SuperVillain superVillain = null;
+        try {
+            superVillain = (SuperVillain) MySerializerController.deSerializeObject(SERIALIZATION_LOCATION + eventpath.toString());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return superVillain;
     }
 
 
     public static void dealWithVillain(Path eventpath) {
-        SuperVillain villain = getVillain(eventpath);
-        villain.setPath(eventpath);
+        SuperVillain villain = null;
+        try {
+            System.out.println("eventpath0: " + eventpath);
+            villain = getVillain(eventpath);
+            villain.setPath(eventpath);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
 
         System.out.println("villain : " + villain);
 
@@ -99,5 +115,18 @@ public class Controller {
 
     public static void defeatVillain(Path eventpath, SuperHero hero, SuperVillain villain) {
 
+    }
+
+    public static void destroyVillain(Path eventpath) {
+     // destroy file SERIALIZATION_LOCATION + eventpath.toString()
+        File fileToDestroy = new File(SERIALIZATION_LOCATION + eventpath.toString());
+        if(fileToDestroy.delete())
+        {
+            System.out.println("File deleted successfully");
+        }
+        else
+        {
+            System.out.println("Failed to delete the file");
+        }
     }
 }

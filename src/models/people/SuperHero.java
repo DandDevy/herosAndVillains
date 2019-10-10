@@ -82,5 +82,6 @@ public class SuperHero implements Serializable, SuperPerson, Observer {
     @Override
     public void update(SuperVillain superVillain) {
         System.out.println("Hero update, villain to beat -->>>" + superVillain);
+        Controller.destroyVillain(superVillain.getPath());
     }
 }
