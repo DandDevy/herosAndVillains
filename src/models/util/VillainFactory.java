@@ -11,5 +11,5 @@ public interface VillainFactory {
      * <p>Gets a villain.</p>
      * @return
      */
-    SuperVillain getVillain();
+    SuperVillain getVillain(String strength);
 }
