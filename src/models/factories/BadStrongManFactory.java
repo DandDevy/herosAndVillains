@@ -14,7 +14,6 @@ public class BadStrongManFactory implements VillainFactory {
      * @param strength
      * @return
      */
-    @Override
     public SuperVillain getVillain(String strength) {
         return new BadStrongMan(strength);
     }

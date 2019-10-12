@@ -13,8 +13,7 @@ public class GoodFlyPersonFactory implements HeroFactory {
      * @param strength
      * @return
      */
-    @Override
-    public SuperHero getHero(String strength) {
+    public static SuperHero getHero(String strength) {
         return new GoodFlyPerson(strength);
     }
 }

@@ -14,7 +14,7 @@ public class GoodStrongManFactory implements HeroFactory {
      * <p>get a GoodStrongMan SuperHero</p>
      * @param strength
      */
-    public SuperHero getHero(String strength) {
+    public static SuperHero getHero(String strength) {
         return new GoodStrongMan(strength);
     }
 }

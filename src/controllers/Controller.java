@@ -1,5 +1,7 @@
 package controllers;
 
+import models.factories.BadFlyPersonFactory;
+import models.factories.BadStrongManFactory;
 import models.factories.PeopleFactory;
 import models.people.BadFlyPerson;
 import models.people.BadStrongMan;
@@ -29,6 +31,12 @@ public class Controller {
 
     public static void addVillain(String type, String strength) {
         SuperVillain villain = PeopleFactory.getVillain(type, strength);
+        if(type.equals("Strong")){
+
+            villain = new BadStrongManFactory().getVillain(strength);
+        } else if(type.equals("Fly")){
+            villain = new BadFlyPersonFactory().getVillain(strength);
+        }
 
         MySerializerController.serializeObject(villain, FOLDER + getBattleFileNumberUpdated() + SER_fILE_ENDING);
         System.out.println(villain + " has been serialized");

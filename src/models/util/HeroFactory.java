@@ -11,5 +11,9 @@ public interface HeroFactory {
      * <p>Gets a hero.</p>
      * @return
      */
-    public  SuperHero getHero(String strength);
+    public static SuperHero getHero(String strength) {
+        return new SuperHero(strength);
+    }
+
+    static SuperHero getHero(String strength);
 }

@@ -9,7 +9,10 @@ import models.people.SuperVillain;
 public interface VillainFactory {
     /**
      * <p>Gets a villain.</p>
+     *
      * @return
      */
-    SuperVillain getVillain(String strength);
+    static SuperVillain getVillain(String strength) {
+        return new SuperVillain(strength);
+    }
 }
