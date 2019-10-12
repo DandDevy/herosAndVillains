@@ -84,6 +84,7 @@ public class Controller {
         } catch (Exception e){
             System.out.println("Controller.getHeroForVillain: not a BadStrongMan <--" + villain);
         }
+        System.out.println("Controller.getHeroForVillain: created ->>" + hero + "   to fight   " + villain);
         return hero;
     }
 

@@ -14,4 +14,8 @@ public class GoodFlyPerson extends SuperHero{
         super(strength);
     }
 
+    @Override
+    public String toString() {
+        return "GoodFlyPerson{} is a" + super.toString();
+    }
 }

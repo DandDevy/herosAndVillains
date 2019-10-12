@@ -12,4 +12,9 @@ public class BadFlyPerson extends SuperVillain{
     public BadFlyPerson(String strength) {
         super( strength);
     }
+
+    @Override
+    public String toString() {
+        return "BadFlyPerson{} is a "  + super.toString();
+    }
 }

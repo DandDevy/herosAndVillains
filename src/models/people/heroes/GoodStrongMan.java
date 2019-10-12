@@ -12,4 +12,9 @@ public class GoodStrongMan extends SuperHero{
     public GoodStrongMan( String strength) {
         super(strength);
     }
+
+    @Override
+    public String toString() {
+        return "GoodStrongMan{} is a" + super.toString();
+    }
 }
