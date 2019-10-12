@@ -41,7 +41,7 @@ public class WatcherController {
 
             //clears the watch key every time.
             do {
-                System.out.println("Waiting every " + delay + " seconds after I see something");
+                System.out.println("WatcherController: Waiting every " + delay + " seconds after I see something");
                 watchKey = service.take();
                 Path myEventDir = myWatchKeyPathMap.get(watchKey);
 
@@ -50,13 +50,13 @@ public class WatcherController {
 
                     Path eventpath = (Path) event.context();
 
-                    System.out.println("WATCHER ANNOUNCEMENT: " + myEventDir + "   " + kind + "   " +  eventpath);
+                    System.out.println("WatcherController: WATCHER ANNOUNCEMENT: " + myEventDir + "   " + kind + "   " +  eventpath);
 
 
 //                    DefeatVillainController.dealWithVillain(eventpath);
                     try{
                         if(kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                            System.out.println("villain here ->>" + eventpath);
+                            System.out.println("WatcherController: villain here ->>" + eventpath);
                             Controller.dealWithVillain(eventpath);
                         }
                     } catch (Exception e){

@@ -30,7 +30,7 @@ public class Controller {
     }
 
     public static void addVillain(String type, String strength) {
-        SuperVillain villain = PeopleFactory.getVillain(type, strength);
+        SuperVillain villain = null;//PeopleFactory.getVillain(type, strength);
         if(type.equals("Strong")){
 
             villain = new BadStrongManFactory().getVillain(strength);
@@ -101,7 +101,6 @@ public class Controller {
     public static void dealWithVillain(Path eventpath) {
         SuperVillain villain = null;
         try {
-            System.out.println("eventpath0: " + eventpath);
             villain = getVillain(eventpath);
             villain.setPath(eventpath);
         } catch (Exception e){
@@ -121,9 +120,6 @@ public class Controller {
 //        removeFile(eventpath);
     }
 
-    public static void defeatVillain(Path eventpath, SuperHero hero, SuperVillain villain) {
-
-    }
 
     public static void destroyVillain(Path eventpath) {
      // destroy file SERIALIZATION_LOCATION + eventpath.toString()

@@ -14,6 +14,4 @@ public interface HeroFactory {
     public static SuperHero getHero(String strength) {
         return new SuperHero(strength);
     }
-
-    static SuperHero getHero(String strength);
 }

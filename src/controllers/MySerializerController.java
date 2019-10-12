@@ -79,7 +79,6 @@ public class MySerializerController {
             FileInputStream fileIn = new FileInputStream(location);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Serializable o = (Serializable) in.readObject();
-            System.out.println("what is inside my serialized file: \n"+o);
 
             Object test = (Object) o;
 
