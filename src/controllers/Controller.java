@@ -70,21 +70,30 @@ public class Controller {
 
     public static SuperHero getHeroForVillain(SuperVillain villain) {
         SuperHero hero = null;
-        try {
-            BadFlyPerson badFlyPerson = (BadFlyPerson) villain;
+        if(villain instanceof BadFlyPerson){
             hero = new GoodFlyPersonFactory().getHero(villain.getStrength());
             System.out.println("Controller.getHeroForVillain: This is a BadFlyPerson <--" + villain);
-        } catch (Exception e){
-            System.out.println("Controller.getHeroForVillain: not a BadFlyPerson <--" + villain);
-        }
-        try {
+
+        } else if( villain instanceof BadStrongMan){
             BadStrongMan badStrongMan = (BadStrongMan) villain;
             hero = new GoodStrongManFactory().getHero(villain.getStrength());
             System.out.println("Controller.getHeroForVillain: This is a BadStrongMan <--" + villain);
-        } catch (Exception e){
-            System.out.println("Controller.getHeroForVillain: not a BadStrongMan <--" + villain);
         }
-        System.out.println("Controller.getHeroForVillain: created ->>" + hero + "   to fight   " + villain);
+//        try {
+//            BadFlyPerson badFlyPerson = (BadFlyPerson) villain;
+//            hero = new GoodFlyPersonFactory().getHero(villain.getStrength());
+//            System.out.println("Controller.getHeroForVillain: This is a BadFlyPerson <--" + villain);
+//        } catch (Exception e){
+//            System.out.println("Controller.getHeroForVillain: not a BadFlyPerson <--" + villain);
+//        }
+//        try {
+//            BadStrongMan badStrongMan = (BadStrongMan) villain;
+//            hero = new GoodStrongManFactory().getHero(villain.getStrength());
+//            System.out.println("Controller.getHeroForVillain: This is a BadStrongMan <--" + villain);
+//        } catch (Exception e){
+//            System.out.println("Controller.getHeroForVillain: not a BadStrongMan <--" + villain);
+//        }
+//        System.out.println("Controller.getHeroForVillain: created ->>" + hero + "   to fight   " + villain);
         return hero;
     }
 
