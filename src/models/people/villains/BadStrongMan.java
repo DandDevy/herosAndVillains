@@ -1,4 +1,4 @@
-package models.people;
+package models.people.villains;
 
 /**
  * <h1>BadStongMan</h1>

@@ -1,6 +1,6 @@
 package models.util;
 
-import models.people.SuperVillain;
+import models.people.villains.SuperVillain;
 
 /**
  * <h1>VillainFactory</h1>

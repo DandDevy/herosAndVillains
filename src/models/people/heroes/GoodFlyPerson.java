@@ -1,4 +1,4 @@
-package models.people;
+package models.people.heroes;
 
 /**
  * <h1>GoodFlyPerson</h1>

@@ -1,11 +1,11 @@
-package models.people;
+package models.people.heroes;
 
 import controllers.Controller;
+import models.people.SuperPerson;
+import models.people.villains.SuperVillain;
 import models.util.Observer;
 
 import java.io.Serializable;
-import java.nio.file.Path;
-import java.util.Observable;
 
 /**
  * <h1>SuperHero</h1>
@@ -37,22 +37,6 @@ public class SuperHero implements Serializable, SuperPerson, Observer {
      */
     public void setStrength(String strength) {
         this.strength = strength;
-    }
-
-//    @Override
-    public void update(Observable o, Object arg) {
-        System.out.println("update: " + this);
-
-        try {
-            SuperVillain villain = new SuperVillain("asd");//(SuperVillain) o;
-            Path eventpath = (Path) arg;
-
-            SuperHero hero = Controller.getHeroForVillain(villain);
-//
-            Controller.defeatVillain(eventpath, hero, villain);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     /**

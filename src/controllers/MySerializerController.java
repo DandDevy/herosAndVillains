@@ -1,7 +1,6 @@
 package controllers;
 
-import models.people.SuperHero;
-import models.people.SuperPerson;
+import models.people.heroes.SuperHero;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
-package models.people;
+package models.people.villains;
 
+import models.people.SuperPerson;
 import models.util.Observable;
 import models.util.Observer;
 

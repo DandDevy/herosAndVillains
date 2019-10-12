@@ -1,12 +1,13 @@
 package controllers;
 
-import models.factories.BadFlyPersonFactory;
-import models.factories.BadStrongManFactory;
-import models.factories.PeopleFactory;
-import models.people.BadFlyPerson;
-import models.people.BadStrongMan;
-import models.people.SuperHero;
-import models.people.SuperVillain;
+import models.factories.heroFactories.GoodFlyPersonFactory;
+import models.factories.heroFactories.GoodStrongManFactory;
+import models.factories.villainFactories.BadFlyPersonFactory;
+import models.factories.villainFactories.BadStrongManFactory;
+import models.people.heroes.SuperHero;
+import models.people.villains.BadFlyPerson;
+import models.people.villains.BadStrongMan;
+import models.people.villains.SuperVillain;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -19,14 +20,20 @@ public class Controller {
     private static int battleFileNumber = 0;
 
     public static void addHero(String type, String strength) {
-        SuperHero hero = PeopleFactory.getHero(type, strength);
-        MySerializerController.serializeHero(hero);
+        SuperHero hero = null;//PeopleFactory.getHero(type, strength);
+        if(type.equals("Strong")){
+            hero = new GoodStrongManFactory().getHero(strength);
+        } else if(type.equals("Fly")){
+            hero = new GoodFlyPersonFactory().getHero(strength);
+        }
+//        MySerializerController.serializeHero(hero);
 
-        SuperHero hero1 = MySerializerController.deSerializeHero();
+//        SuperHero hero1 = MySerializerController.deSerializeHero();
 
-        MySerializerController.serializeObject(hero, SERIALIZATION_LOCATION + "battle-zone-1.ser");
-        SuperHero hero3 = (SuperHero) MySerializerController.deSerializeObject(SERIALIZATION_LOCATION + "battle-zone-1.ser");
-        System.out.println("hero3" + hero3);
+        int battleNumber = getBattleFileNumberUpdated();
+        MySerializerController.serializeObject(hero, FOLDER + battleNumber + SER_fILE_ENDING);
+        SuperHero deSerializedHero = (SuperHero) MySerializerController.deSerializeObject(FOLDER + battleNumber + SER_fILE_ENDING);
+        System.out.println("controller.addHero(): The hero that was serialized was: " + deSerializedHero);
     }
 
     public static void addVillain(String type, String strength) {
@@ -39,7 +46,7 @@ public class Controller {
         }
 
         MySerializerController.serializeObject(villain, FOLDER + getBattleFileNumberUpdated() + SER_fILE_ENDING);
-        System.out.println(villain + " has been serialized");
+        System.out.println("controller.addVillain: "+ villain + " has been serialized");
     }
 
     public static synchronized int getBattleFileNumberUpdated(){
@@ -62,22 +69,22 @@ public class Controller {
     }
 
     public static SuperHero getHeroForVillain(SuperVillain villain) {
-        String villainType = "Strong";
+        SuperHero hero = null;
         try {
             BadFlyPerson badFlyPerson = (BadFlyPerson) villain;
-            villainType = "Fly";
-            System.out.println("This is a BadFlyPerson <--" + villain);
+            hero = new GoodFlyPersonFactory().getHero(villain.getStrength());
+            System.out.println("Controller.getHeroForVillain: This is a BadFlyPerson <--" + villain);
         } catch (Exception e){
-            System.out.println("not a BadFlyPerson <--" + villain);
+            System.out.println("Controller.getHeroForVillain: not a BadFlyPerson <--" + villain);
         }
         try {
             BadStrongMan badStrongMan = (BadStrongMan) villain;
-            villainType = "Strong";
-            System.out.println("This is a BadStrongMan <--" + villain);
+            hero = new GoodStrongManFactory().getHero(villain.getStrength());
+            System.out.println("Controller.getHeroForVillain: This is a BadStrongMan <--" + villain);
         } catch (Exception e){
-            System.out.println("not a BadStrongMan <--" + villain);
+            System.out.println("Controller.getHeroForVillain: not a BadStrongMan <--" + villain);
         }
-        return PeopleFactory.getHero(villainType, villain.getStrength());
+        return hero;
     }
 
     /**
@@ -86,7 +93,7 @@ public class Controller {
      * @return
      */
     private static SuperVillain getVillain(Path eventpath) {
-        System.out.println("SERIALIZATION_LOCATION + eventpath.toString():  " + SERIALIZATION_LOCATION + eventpath.toString());
+        System.out.println("Controller.getVillain: SERIALIZATION_LOCATION + eventpath.toString():  " + SERIALIZATION_LOCATION + eventpath.toString());
         SuperVillain superVillain = null;
         try {
             superVillain = (SuperVillain) MySerializerController.deSerializeObject(SERIALIZATION_LOCATION + eventpath.toString());

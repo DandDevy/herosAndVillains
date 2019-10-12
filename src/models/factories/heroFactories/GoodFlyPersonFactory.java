@@ -1,7 +1,7 @@
-package models.factories;
+package models.factories.heroFactories;
 
-import models.people.GoodFlyPerson;
-import models.people.SuperHero;
+import models.people.heroes.GoodFlyPerson;
+import models.people.heroes.SuperHero;
 import models.util.HeroFactory;
 /**
  * <h1>GoodFlyPersonFactory</h1>

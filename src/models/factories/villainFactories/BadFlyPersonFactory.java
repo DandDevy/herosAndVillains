@@ -1,7 +1,7 @@
-package models.factories;
+package models.factories.villainFactories;
 
-import models.people.BadFlyPerson;
-import models.people.SuperVillain;
+import models.people.villains.BadFlyPerson;
+import models.people.villains.SuperVillain;
 import models.util.VillainFactory;
 /**
  * <h1>BadFlyPersonFactory</h1>

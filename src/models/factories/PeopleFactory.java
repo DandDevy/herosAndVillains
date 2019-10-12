@@ -1,7 +1,12 @@
 package models.factories;
 
 
-import models.people.*;
+import models.people.heroes.GoodFlyPerson;
+import models.people.heroes.GoodStrongMan;
+import models.people.heroes.SuperHero;
+import models.people.villains.BadFlyPerson;
+import models.people.villains.BadStrongMan;
+import models.people.villains.SuperVillain;
 
 /**
  * <h1>PeopleFactory</h1>
