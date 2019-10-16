@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
  * <p>This controller watches the common folder for changes</p>
  */
 public class WatcherController {
+    private static boolean isFirstTime = true;
 
     /**
      * <p>watches the file path with a dedicated delay</p>
@@ -56,6 +57,10 @@ public class WatcherController {
 //                    DefeatVillainController.dealWithVillain(eventpath);
                     try{
                         if(kind == StandardWatchEventKinds.ENTRY_CREATE) {
+                            if (isFirstTime)
+                                TimeUnit.MILLISECONDS.sleep(200);
+
+                            isFirstTime = false;
                             System.out.println("WatcherController: villain here ->>" + eventpath);
                             Controller.dealWithVillain(eventpath);
                         }
