@@ -90,6 +90,9 @@ public class MySerializerController {
             if (e instanceof FileNotFoundException)
                 System.out.println("File not found because watcher has already deleted + " + location);
 
+            else if(e instanceof EOFException)
+                System.out.println("File is hasn't had a something serialized to it yet");
+
             else
                 e.printStackTrace();
         }

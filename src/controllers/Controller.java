@@ -11,6 +11,7 @@ import models.people.villains.SuperVillain;
 import models.threaded.VillainGenerator;
 import models.threaded.Watcher;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
@@ -131,7 +132,10 @@ public class Controller {
         try {
             superVillain = (SuperVillain) MySerializerController.deSerializeObject(SERIALIZATION_LOCATION + eventpath.toString());
         } catch (Exception e){
-            e.printStackTrace();
+            if(e instanceof ClassCastException)
+                System.out.println("THAT WAS HERO");
+            else
+                e.printStackTrace();
         }
 
         return superVillain;
