@@ -8,6 +8,7 @@ import models.people.heroes.SuperHero;
 import models.people.villains.BadFlyPerson;
 import models.people.villains.BadStrongMan;
 import models.people.villains.SuperVillain;
+import models.threaded.VillainGenerator;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -18,6 +19,7 @@ public class Controller {
     private static final String FOLDER = SERIALIZATION_LOCATION + "battle-zone-";
     private static final String SER_fILE_ENDING = ".ser";
     private static int battleFileNumber = 0;
+    private static final boolean GENERATE_IN_THREAD = true;
 
     public static void addHero(String type, String strength) {
         SuperHero hero = null;//PeopleFactory.getHero(type, strength);
@@ -58,14 +60,20 @@ public class Controller {
     }
 
     public static void generateVillain(int delay, String type, String strength) {
-        while (true){
-            addVillain(type, strength);
-            try {
-                TimeUnit.SECONDS.sleep(delay);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        if(GENERATE_IN_THREAD){
+            Thread villainGeneratingThread = new Thread(new VillainGenerator(delay, type, strength));
+            villainGeneratingThread.start();
+        } else {
+            while(true){
+                addVillain(type, strength);
+                try {
+                    TimeUnit.SECONDS.sleep(delay);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
     }
 
     public static void observe(int delay) {

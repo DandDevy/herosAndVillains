@@ -14,7 +14,7 @@ public class VillainGenerator implements Runnable {
     private String type, strength;
 
     /**
-     * <p>VillainGenerator constructor will take a delay for the villain generation, a type for the villain and strength for it/</p>
+     * <p>VillainGenerator constructor will take a delay for the villain generation, a type for the villain and strength for it.</p>
      * @param delay
      * @param type
      * @param strength
