@@ -49,6 +49,10 @@ public class Controller {
         System.out.println("controller.addVillain: "+ villain + " has been serialized");
     }
 
+    /**
+     * <p>This will return the next battle zone number to use. It increments by 1 and is synchronised.</p>
+     * @return
+     */
     public static synchronized int getBattleFileNumberUpdated(){
         return battleFileNumber++;
     }
