@@ -1,4 +1,6 @@
-package controllers;
+package models.threaded;
+
+import controllers.Controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,9 +15,16 @@ import java.util.concurrent.TimeUnit;
  * <h1>WatcherController</h1>
  * <p>This controller watches the common folder for changes</p>
  */
-public class WatcherController {
+public class Watcher implements Runnable{
     private static ArrayList<Path> pathArrayList;
     private static final boolean USE_WATCH_SERVICE = false;
+    private String filePathString;
+    private int delay;
+
+    public Watcher(String filePathString, int delay) {
+        this.filePathString = filePathString;
+        this.delay = delay;
+    }
 
     /**
      * <p>watches the file path with a dedicated delay</p>
@@ -137,5 +146,10 @@ public class WatcherController {
                 pathArrayList.add(Paths.get(fileEntry.getName()));
             }
         }
+    }
+
+    @Override
+    public void run() {
+        watch(filePathString, delay);
     }
 }

@@ -9,6 +9,7 @@ import models.people.villains.BadFlyPerson;
 import models.people.villains.BadStrongMan;
 import models.people.villains.SuperVillain;
 import models.threaded.VillainGenerator;
+import models.threaded.Watcher;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,6 +22,7 @@ public class Controller {
     private static final String SER_fILE_ENDING = ".ser";
     private static int battleFileNumber = 0;
     private static final boolean GENERATE_IN_THREAD = true;
+    private static final boolean OBSERVE_IN_THREAD = true;
 
     public static void addHero(String type, String strength) {
         SuperHero hero = null;//PeopleFactory.getHero(type, strength);
@@ -77,8 +79,16 @@ public class Controller {
 
     }
 
+    /**
+     * <p>Can observe in a thread if chosen, takes the delay at which we want to observe at</p>
+     * @param delay
+     */
     public static void observe(int delay) {
-        WatcherController.watch(SERIALIZATION_LOCATION, delay);
+        if(OBSERVE_IN_THREAD) {
+            Thread observerThread = new Thread(new Watcher(SERIALIZATION_LOCATION, delay));
+            observerThread.start();
+        } else
+            Watcher.watch(SERIALIZATION_LOCATION, delay);
     }
 
     public static SuperHero getHeroForVillain(SuperVillain villain) {
