@@ -1,9 +1,12 @@
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -11,7 +14,8 @@ import java.util.concurrent.TimeUnit;
  * <p>This controller watches the common folder for changes</p>
  */
 public class WatcherController {
-    private static boolean isFirstTime = true;
+    private static ArrayList<Path> pathArrayList;
+    private static final boolean USE_WATCH_SERVICE = false;
 
     /**
      * <p>watches the file path with a dedicated delay</p>
@@ -19,6 +23,47 @@ public class WatcherController {
      * @param delay
      */
     public static void watch(String filePathString, int delay){
+        if (USE_WATCH_SERVICE)
+            watchWithWatchService(filePathString, delay);
+
+        else
+            watchWithFolder(filePathString, delay);
+
+    }
+
+    /**
+     * <p>Uses an ArrayList and the (File) .listFiles() to get the files in the common folder</p>
+     * @param filePathString
+     * @param delay
+     */
+    private static void watchWithFolder(String filePathString, int delay) {
+        pathArrayList = new ArrayList<Path>();
+        while (true) {
+            setListFilesForFolder(new File(filePathString));
+            System.out.println("WatcherController: villainSS here ->>" + pathArrayList + "\n\n");
+            for (Path eventpath : pathArrayList) {
+                try {
+                    Controller.dealWithVillain(eventpath);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                TimeUnit.SECONDS.sleep(delay);
+                pathArrayList.clear();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * <p>Uses watchService to watch for changes.</p>
+     * @param filePathString
+     * @param delay
+     */
+    private static void watchWithWatchService(String filePathString, int delay){
 
 
         try(WatchService service = FileSystems.getDefault().newWatchService()) {
@@ -60,7 +105,6 @@ public class WatcherController {
 
                             TimeUnit.MILLISECONDS.sleep(200);
 
-                            isFirstTime = false;
                             System.out.println("WatcherController: villain here ->>" + eventpath);
                             Controller.dealWithVillain(eventpath);
                         }
@@ -77,6 +121,21 @@ public class WatcherController {
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * <p>lists all the files in a folder</p>
+     * @param folder
+     */
+    private static void setListFilesForFolder(final File folder) {
+        for (final File fileEntry : Objects.requireNonNull(folder.listFiles())) {
+            if (fileEntry.isDirectory()) {
+                setListFilesForFolder(fileEntry);
+            } else {
+                System.out.println(fileEntry.getName());
+                pathArrayList.add(Paths.get(fileEntry.getName()));
+            }
         }
     }
 }
