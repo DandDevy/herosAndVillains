@@ -87,7 +87,11 @@ public class MySerializerController {
             fileIn.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            if (e instanceof FileNotFoundException)
+                System.out.println("File not found because watcher has already deleted + " + location);
+
+            else
+                e.printStackTrace();
         }
 
         System.out.println("what list is inside my deserialized file: \n" + object);

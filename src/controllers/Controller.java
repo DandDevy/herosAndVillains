@@ -11,6 +11,7 @@ import models.people.villains.SuperVillain;
 import models.threaded.VillainGenerator;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 
@@ -131,17 +132,29 @@ public class Controller {
         SuperVillain villain = null;
         try {
             villain = getVillain(eventpath);
-            villain.setPath(eventpath);
         } catch (Exception e){
-            e.printStackTrace();
+
+            if (e instanceof FileNotFoundException)
+                System.out.println("File not found because watcher has already deleted + " + eventpath);
+
+            else
+                e.printStackTrace();
+        }
+        if(villain != null){
+            try {
+                villain.setPath(eventpath);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+            System.out.println("villain : " + villain);
+
+            SuperHero hero = getHeroForVillain(villain);
+            villain.registerObserver(hero);
+            villain.notifyObservers();
         }
 
 
-        System.out.println("villain : " + villain);
-
-        SuperHero hero = getHeroForVillain(villain);
-        villain.registerObserver(hero);
-        villain.notifyObservers();
 
 //        villain.notifyObservers(eventpath);
 //        hero.update(villain, eventpath);

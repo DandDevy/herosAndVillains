@@ -56,9 +56,9 @@ public class WatcherController {
 
 //                    DefeatVillainController.dealWithVillain(eventpath);
                     try{
-                        if(kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                            if (isFirstTime)
-                                TimeUnit.MILLISECONDS.sleep(200);
+                        if(kind == StandardWatchEventKinds.ENTRY_CREATE || kind == StandardWatchEventKinds.ENTRY_MODIFY) {
+
+                            TimeUnit.MILLISECONDS.sleep(200);
 
                             isFirstTime = false;
                             System.out.println("WatcherController: villain here ->>" + eventpath);
