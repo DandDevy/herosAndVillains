@@ -24,12 +24,15 @@ public abstract class MyGUI {
     private RadioButton personVersion2;
     private Button addSuperPersonBtn;
     private Button delayBtn;
+    private Button stopMyThreads;
 
     private static final int PRIMARY_LAYOUT_SPACING = 10;
     private static final int SECONDARY_LAYOUT_SPACING = 4;
     private static final int PRIMARY_LAYOUT_FULL_PADDING = 10;
 
-    protected MyGUI(String addPersonLabelTypeText, String personTypeV1, String personTypeV2, String addPersonLabelStrengthText, String colour, String delayLabelText, String addPersonBtnText, String delayBtnText, String defaultDelay) {
+
+
+    protected MyGUI(String addPersonLabelTypeText, String personTypeV1, String personTypeV2, String addPersonLabelStrengthText, String colour, String delayLabelText, String addPersonBtnText, String delayBtnText, String defaultDelay, String stopMyThreadsText) {
 
         //the primary layout is the layout of layout. The top of the tree.
         primaryLayout = new HBox(PRIMARY_LAYOUT_SPACING);
@@ -87,10 +90,13 @@ public abstract class MyGUI {
 
         delayBtn = new Button(delayBtnText);
 
+        stopMyThreads = new Button(stopMyThreadsText);
+
         configVbox.getChildren().addAll(
                 delayLabel,
                 delayTF,
-                delayBtn
+                delayBtn,
+                stopMyThreads
         );
 
         //primary layout takes layouts, aligns itself and sets a colour style
@@ -103,7 +109,13 @@ public abstract class MyGUI {
         primaryLayout.setStyle("-fx-background-color:  "+ colour +";");
     }
 
-
+    /**
+     * returns a button of the stop threads
+     * @return Button
+     */
+    protected Button getStopMyThreads() {
+        return stopMyThreads;
+    }
 
     /**
      * returns a button of the add Person

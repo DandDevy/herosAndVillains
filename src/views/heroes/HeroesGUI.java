@@ -22,14 +22,15 @@ public class HeroesGUI extends MyGUI {
     private static final String ADD_PERSON_BTN_TEXT = "Add hero now";
     private static final String DELAY_BTN_TEXT = "observe for villains at this delay";
     private static final String DEFAULT_DELAY = "0";
+    private static final String STOP_ALL_OBSERVATIONS = "Stop all observations";
     private Button addHeroBtn, observingDelayBtn;
 
     public HeroesGUI() {
         super(
                 ENTER_YOUR_HERO_TYPE,STONG_HERO, FLY_HERO, ENTER_YOUR_HERO_STRENGTH, COLOUR,
                 ENTER_YOUR_DELAY_OF_OBSERVING, ADD_PERSON_BTN_TEXT,
-                DELAY_BTN_TEXT, DEFAULT_DELAY
-        );
+                DELAY_BTN_TEXT, DEFAULT_DELAY,
+                STOP_ALL_OBSERVATIONS);
         setButtons();
     }
 
@@ -55,6 +56,10 @@ public class HeroesGUI extends MyGUI {
         super.getDelayBtn().setOnAction(event -> {
             System.out.println("User wishes to observe at " + super.getDelay() + " seconds");
             Controller.observe(super.getDelay());
+        });
+
+        super.getStopMyThreads().setOnAction(event -> {
+            System.out.println("STOP OBSERVATIONS");
         });
     }
 

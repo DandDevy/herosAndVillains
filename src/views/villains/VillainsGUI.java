@@ -21,14 +21,15 @@ public class VillainsGUI extends MyGUI {
     private static final String ADD_PERSON_BTN_TEXT = "Add villain now";
     private static final String DELAY_BTN_TEXT = "Or generate at this delay";
     private static final String DEFAULT_DELAY = "1";
+    private static final String STOP_ALL_GENERATIONS = "Stop all generations";
     private Button addHeroBtn, observingDelayBtn;
 
     public VillainsGUI() {
         super(
                 ENTER_YOUR_VILLAIN_TYPE, STRONG_VILLAIN, FLYING_VILLAIN, ENTER_YOUR_VILLAIN_STRENGTH, COLOUR,
                 ENTER_YOUR_DELAY_OF_GENERATING, ADD_PERSON_BTN_TEXT,
-                DELAY_BTN_TEXT, DEFAULT_DELAY
-        );
+                DELAY_BTN_TEXT, DEFAULT_DELAY,
+                STOP_ALL_GENERATIONS);
         setButtons();
     }
 
@@ -60,6 +61,10 @@ public class VillainsGUI extends MyGUI {
             }
             System.out.println("User wishes to generate at " + super.getDelay() + " seconds");
             Controller.generateVillain(super.getDelay(),villainType, super.getAddSuperPersonStrengthTF().getText());
+        });
+
+        super.getStopMyThreads().setOnAction(event -> {
+            System.out.println("STOP MY GENERATIONS");
         });
     }
 
