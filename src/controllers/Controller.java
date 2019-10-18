@@ -11,10 +11,11 @@ import models.people.villains.SuperVillain;
 import models.threaded.VillainGenerator;
 import models.threaded.Watcher;
 
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Controller {
@@ -24,6 +25,9 @@ public class Controller {
     private static int battleFileNumber = 0;
     private static final boolean GENERATE_IN_THREAD = true;
     private static final boolean OBSERVE_IN_THREAD = true;
+    private static ExecutorService observerExecutorService;
+    private static ExecutorService villainGeneratorExecutorService;
+
 
     public static void addHero(String type, String strength) {
         SuperHero hero = null;//PeopleFactory.getHero(type, strength);
@@ -66,7 +70,7 @@ public class Controller {
     public static void generateVillain(int delay, String type, String strength) {
         if(GENERATE_IN_THREAD){
             Thread villainGeneratingThread = new Thread(new VillainGenerator(delay, type, strength));
-            villainGeneratingThread.start();
+            villainGeneratorExecutorService.execute(villainGeneratingThread);
         } else {
             while(true){
                 addVillain(type, strength);
@@ -87,7 +91,7 @@ public class Controller {
     public static void observe(int delay) {
         if(OBSERVE_IN_THREAD) {
             Thread observerThread = new Thread(new Watcher(SERIALIZATION_LOCATION, delay));
-            observerThread.start();
+            observerExecutorService.execute(observerThread);
         } else
             Watcher.watch(SERIALIZATION_LOCATION, delay);
     }
