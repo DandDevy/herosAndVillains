@@ -13,7 +13,7 @@ public class BadFlyPersonFactory implements VillainFactory {
      * @param strength
      * @return
      */
-    public static SuperVillain getVillain(String strength) {
+    public SuperVillain getVillain(String strength) {
         return new BadFlyPerson(strength);
     }
 }

@@ -12,7 +12,6 @@ public interface VillainFactory {
      *
      * @return
      */
-    static SuperVillain getVillain(String strength) {
-        return new SuperVillain(strength);
-    }
+    SuperVillain getVillain(String strength);
+
 }

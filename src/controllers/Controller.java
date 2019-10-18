@@ -28,7 +28,9 @@ public class Controller {
     public static void addHero(String type, String strength) {
         SuperHero hero = null;//PeopleFactory.getHero(type, strength);
         if(type.equals("Strong")){
-            hero = new GoodStrongManFactory().getHero(strength);
+            GoodStrongManFactory goodStrongManFactory = new GoodStrongManFactory();
+
+            hero = goodStrongManFactory.getHero(strength);
         } else if(type.equals("Fly")){
             hero = new GoodFlyPersonFactory().getHero(strength);
         }
