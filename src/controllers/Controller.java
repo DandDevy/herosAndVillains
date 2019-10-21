@@ -31,6 +31,11 @@ public class Controller {
     private static ArrayList<VillainGenerator> villainsGeneratorsInThreads = new ArrayList<>();
 
 
+    /**
+     * <p>adds a hero to the common folder.</p>
+     * @param type
+     * @param strength
+     */
     public static void addHero(String type, String strength) {
         SuperHero hero = null;//PeopleFactory.getHero(type, strength);
         if(type.equals("Strong")){
@@ -48,6 +53,11 @@ public class Controller {
         System.out.println("controller.addHero(): The hero that was serialized was: " + deSerializedHero);
     }
 
+    /**
+     * <p>Adds a villain to the common folder</p>
+     * @param type
+     * @param strength
+     */
     public static void addVillain(String type, String strength) {
         SuperVillain villain = null;//PeopleFactory.getVillain(type, strength);
         if(type.equals("Strong")){
@@ -69,6 +79,12 @@ public class Controller {
         return battleFileNumber++;
     }
 
+    /**
+     * <p>starts a generator for a villain</p>
+     * @param delay
+     * @param type
+     * @param strength
+     */
     public static void generateVillain(int delay, String type, String strength) {
         if(GENERATE_IN_THREAD){
             VillainGenerator villainGenerator = new VillainGenerator(delay, type, strength);
@@ -104,6 +120,11 @@ public class Controller {
             Watcher.watch(SERIALIZATION_LOCATION, delay);
     }
 
+    /**
+     * <p>gets a specific hero for a specific villain</p>
+     * @param villain
+     * @return
+     */
     public static SuperHero getHeroForVillain(SuperVillain villain) {
         SuperHero hero = null;
         if(villain instanceof BadFlyPerson){
@@ -154,6 +175,10 @@ public class Controller {
     }
 
 
+    /**
+     * <p>handle a villain when is found in the common folder</p>
+     * @param eventpath
+     */
     public static void dealWithVillain(Path eventpath) {
         SuperVillain villain = null;
         try {
@@ -189,6 +214,10 @@ public class Controller {
     }
 
 
+    /**
+     * <p>destroys villain file.</p>
+     * @param eventpath
+     */
     public static void destroyVillain(Path eventpath) {
      // destroy file SERIALIZATION_LOCATION + eventpath.toString()
         File fileToDestroy = new File(SERIALIZATION_LOCATION + eventpath.toString());
@@ -202,11 +231,17 @@ public class Controller {
         }
     }
 
+    /**
+     * <p>stops villain generator threads</p>
+     */
     public static void stopGenerations() {
         for (VillainGenerator villainGenerator : villainsGeneratorsInThreads)
             villainGenerator.terminate();
     }
 
+    /**
+     * <p>Stops watcher threads</p>
+     */
     public static void stopObservations() {
         for(Watcher watcher : watchersInThreads)
             watcher.terminate();
