@@ -20,6 +20,7 @@ public class Watcher implements Runnable{
     private static final boolean USE_WATCH_SERVICE = false;
     private String filePathString;
     private int delay;
+    private static boolean keepRunning = true;
 
     public Watcher(String filePathString, int delay) {
         this.filePathString = filePathString;
@@ -47,7 +48,7 @@ public class Watcher implements Runnable{
      */
     private static void watchWithFolder(String filePathString, int delay) {
         pathArrayList = new ArrayList<Path>();
-        while (true) {
+        while (keepRunning) {
             setListFilesForFolder(new File(filePathString));
             System.out.println("WatcherController: villainSS here ->>" + pathArrayList + "\n\n");
             for (Path eventpath : pathArrayList) {
@@ -125,7 +126,7 @@ public class Watcher implements Runnable{
 
                 watchKey.reset();
                 TimeUnit.SECONDS.sleep(delay);
-            } while (true);// watchKey.reset() inside
+            } while (keepRunning);// watchKey.reset() inside
 
 
         } catch (IOException | InterruptedException e) {
@@ -151,5 +152,9 @@ public class Watcher implements Runnable{
     @Override
     public void run() {
         watch(filePathString, delay);
+    }
+
+    public void terminate(){
+        keepRunning = false;
     }
 }

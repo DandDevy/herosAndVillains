@@ -26,7 +26,9 @@ public class Controller {
     private static final boolean GENERATE_IN_THREAD = true;
     private static final boolean OBSERVE_IN_THREAD = true;
     private static ExecutorService observerExecutorService;
+    private static ArrayList<Watcher> watchersInThreads = new ArrayList<>();
     private static ExecutorService villainGeneratorExecutorService;
+    private static ArrayList<VillainGenerator> villainsGeneratorsInThreads = new ArrayList<>();
 
 
     public static void addHero(String type, String strength) {
@@ -69,8 +71,11 @@ public class Controller {
 
     public static void generateVillain(int delay, String type, String strength) {
         if(GENERATE_IN_THREAD){
-            Thread villainGeneratingThread = new Thread(new VillainGenerator(delay, type, strength));
-            villainGeneratorExecutorService.execute(villainGeneratingThread);
+            VillainGenerator villainGenerator = new VillainGenerator(delay, type, strength);
+            Thread villainGeneratingThread = new Thread(villainGenerator);
+            villainGeneratingThread.start();
+//            villainGeneratorExecutorService.execute(villainGeneratingThread);
+            villainsGeneratorsInThreads.add(villainGenerator);
         } else {
             while(true){
                 addVillain(type, strength);
@@ -90,8 +95,11 @@ public class Controller {
      */
     public static void observe(int delay) {
         if(OBSERVE_IN_THREAD) {
-            Thread observerThread = new Thread(new Watcher(SERIALIZATION_LOCATION, delay));
-            observerExecutorService.execute(observerThread);
+            Watcher watcher = new Watcher(SERIALIZATION_LOCATION, delay);
+            Thread observerThread = new Thread(watcher);
+            watchersInThreads.add(watcher);
+            observerThread.start();
+//            observerExecutorService.execute(observerThread);
         } else
             Watcher.watch(SERIALIZATION_LOCATION, delay);
     }
@@ -192,5 +200,15 @@ public class Controller {
         {
             System.out.println("Failed to delete the file");
         }
+    }
+
+    public static void stopGenerations() {
+        for (VillainGenerator villainGenerator : villainsGeneratorsInThreads)
+            villainGenerator.terminate();
+    }
+
+    public static void stopObservations() {
+        for(Watcher watcher : watchersInThreads)
+            watcher.terminate();
     }
 }

@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class VillainGenerator implements Runnable {
     private int delay;
     private String type, strength;
+    private boolean keepRunning = true;
 
     /**
      * <p>VillainGenerator constructor will take a delay for the villain generation, a type for the villain and strength for it.</p>
@@ -30,7 +31,7 @@ public class VillainGenerator implements Runnable {
      */
     @Override
     public void run() {
-        while (true){
+        while (keepRunning){
             Controller.addVillain(type, strength);
             try {
                 TimeUnit.SECONDS.sleep(delay);
@@ -38,5 +39,9 @@ public class VillainGenerator implements Runnable {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void terminate() {
+        keepRunning = false;
     }
 }

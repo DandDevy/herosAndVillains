@@ -65,6 +65,7 @@ public class VillainsGUI extends MyGUI {
 
         super.getStopMyThreads().setOnAction(event -> {
             System.out.println("STOP MY GENERATIONS");
+            Controller.stopGenerations();
         });
     }
 

@@ -11,15 +11,17 @@ public class HeroesAndVillainsMain extends Application {
     private static final String VILLAINS_TITLE = "VILLAINS - Daniel Ashcroft";
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage heroStage) throws Exception {
 
-        primaryStage.setTitle(HEROES_TITLE);
-        primaryStage.setScene(new Scene(
+        //first stage for heroes
+        heroStage.setTitle(HEROES_TITLE);
+        heroStage.setScene(new Scene(
                 new HeroesGUI().getPrimaryLayout(),
                 WIDTH, HEIGHT
         ));
-        primaryStage.show();
+        heroStage.show();
 
+        //second stage for villains
         Stage villainStage = new Stage();
         villainStage.setTitle(VILLAINS_TITLE);
         villainStage.setScene(new Scene(
