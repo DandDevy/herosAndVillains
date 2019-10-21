@@ -20,7 +20,7 @@ public class Watcher implements Runnable{
     private static final boolean USE_WATCH_SERVICE = false;
     private String filePathString;
     private int delay;
-    private static boolean keepRunning = true;
+    private static boolean keepRunning;
 
     public Watcher(String filePathString, int delay) {
         this.filePathString = filePathString;
@@ -151,6 +151,7 @@ public class Watcher implements Runnable{
 
     @Override
     public void run() {
+        keepRunning = true;
         watch(filePathString, delay);
     }
 

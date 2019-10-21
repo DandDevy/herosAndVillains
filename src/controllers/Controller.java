@@ -27,6 +27,7 @@ public class Controller {
     private static final boolean OBSERVE_IN_THREAD = true;
     private static ExecutorService observerExecutorService;
     private static ArrayList<Watcher> watchersInThreads = new ArrayList<>();
+    private static ArrayList<Thread> threadsOfObservers = new ArrayList<>();
     private static ExecutorService villainGeneratorExecutorService;
     private static ArrayList<VillainGenerator> villainsGeneratorsInThreads = new ArrayList<>();
 
@@ -114,6 +115,7 @@ public class Controller {
             Watcher watcher = new Watcher(SERIALIZATION_LOCATION, delay);
             Thread observerThread = new Thread(watcher);
             watchersInThreads.add(watcher);
+            threadsOfObservers.add(observerThread);
             observerThread.start();
 //            observerExecutorService.execute(observerThread);
         } else
@@ -243,7 +245,19 @@ public class Controller {
      * <p>Stops watcher threads</p>
      */
     public static void stopObservations() {
-        for(Watcher watcher : watchersInThreads)
+        for(Watcher watcher : watchersInThreads) {
             watcher.terminate();
+        }
+//        watchersInThreads.clear();
+//        for (Thread thread : threadsOfObservers) {
+//            try {
+//                thread.join();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        threadsOfObservers.clear();
+
+        System.out.println("STOPPED OBSERVATIONS");
     }
 }

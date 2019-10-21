@@ -59,7 +59,6 @@ public class HeroesGUI extends MyGUI {
         });
 
         super.getStopMyThreads().setOnAction(event -> {
-            System.out.println("STOP OBSERVATIONS");
             Controller.stopObservations();
         });
     }
