@@ -111,6 +111,7 @@ public class Controller {
      * @param delay
      */
     public static void observe(int delay) {
+
         if(OBSERVE_IN_THREAD) {
             Watcher watcher = new Watcher(SERIALIZATION_LOCATION, delay);
             Thread observerThread = new Thread(watcher);
