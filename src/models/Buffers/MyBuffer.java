@@ -16,8 +16,8 @@ public class MyBuffer implements models.util.MyBuffer {
 
     private int maxBufferSizeAllowed = 4;
 
-    private Condition notFull = bufferLock.newCondition();
-    private Condition notEmpty = bufferLock.newCondition();
+    private Condition full = bufferLock.newCondition();
+    private Condition empty = bufferLock.newCondition();
 
     public MyBuffer() { this.buffer = new LinkedList<SuperVillain>(); }
 
@@ -37,10 +37,10 @@ public class MyBuffer implements models.util.MyBuffer {
         try {
             while (buffer.size() == maxBufferSizeAllowed){
                 System.out.println("MyBuffer: SET AWAIT TOO FULL");
-                notFull.await();
+                full.await();
             }
             buffer.push(villain);
-            notFull.signalAll();
+            full.signalAll();
         } finally {
             bufferLock.unlock();
         }
@@ -61,11 +61,11 @@ public class MyBuffer implements models.util.MyBuffer {
 
             while (buffer.size() == 0){
                 System.out.println("MyBuffer: GET AWAIT BUFFER EMPTY");
-                notEmpty.await();
+                empty.await();
             }
 
             villainToReturn = buffer.pop();
-            notEmpty.signalAll();
+            empty.signalAll();
 
             return villainToReturn;
 
