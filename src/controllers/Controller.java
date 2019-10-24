@@ -123,7 +123,7 @@ public class Controller {
             observerThread.start();
 //            observerExecutorService.execute(observerThread);
         } else
-            Watcher.watch(SERIALIZATION_LOCATION, delay);
+            new Watcher("",0,new MyBuffer()).watch(SERIALIZATION_LOCATION, delay);
     }
 
     /**

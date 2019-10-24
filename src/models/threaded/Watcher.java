@@ -20,12 +20,12 @@ import java.util.concurrent.TimeUnit;
  * <p>This controller watches the common folder for changes</p>
  */
 public class Watcher implements Runnable{
-    private static ArrayList<Path> pathArrayList;
+    private ArrayList<Path> pathArrayList;
     private static final boolean USE_WATCH_SERVICE = false;
     private String filePathString;
     private int delay;
-    private static boolean keepRunning;
-    private static MyBuffer buffer;
+    private boolean keepRunning;
+    private MyBuffer buffer;
 
     public Watcher(String filePathString, int delay, MyBuffer buffer) {
         this.filePathString = filePathString;
@@ -38,7 +38,7 @@ public class Watcher implements Runnable{
      * @param filePathString
      * @param delay
      */
-    public static void watch(String filePathString, int delay){
+    public void watch(String filePathString, int delay){
         if (USE_WATCH_SERVICE)
             watchWithWatchService(filePathString, delay);
 
@@ -52,7 +52,7 @@ public class Watcher implements Runnable{
      * @param filePathString
      * @param delay
      */
-    private static void watchWithFolder(String filePathString, int delay) {
+    private void watchWithFolder(String filePathString, int delay) {
         pathArrayList = new ArrayList<Path>();
         while (keepRunning) {
             setListFilesForFolder(new File(filePathString));
@@ -75,7 +75,7 @@ public class Watcher implements Runnable{
         }
     }
 
-    private static void dealWithFound(Path eventpath) throws InterruptedException {
+    private void dealWithFound(Path eventpath) throws InterruptedException {
         SuperVillain villain = null;
         try {
             villain = Controller.getVillain(eventpath);
@@ -111,7 +111,7 @@ public class Watcher implements Runnable{
      * @param filePathString
      * @param delay
      */
-    private static void watchWithWatchService(String filePathString, int delay){
+    private void watchWithWatchService(String filePathString, int delay){
 
 
         try(WatchService service = FileSystems.getDefault().newWatchService()) {
@@ -176,7 +176,7 @@ public class Watcher implements Runnable{
      * <p>lists all the files in a folder</p>
      * @param folder
      */
-    private static void setListFilesForFolder(final File folder) {
+    private void setListFilesForFolder(final File folder) {
         for (final File fileEntry : Objects.requireNonNull(folder.listFiles())) {
             if (fileEntry.isDirectory()) {
                 setListFilesForFolder(fileEntry);
