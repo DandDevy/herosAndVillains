@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="1177.0" y="713.0">models.people.villains.BadFlyPerson</node>
+    <node x="145.5" y="1691.0">models.util.HeroFactory</node>
+    <node x="721.5" y="100.0">models.util.Observer</node>
+    <node x="1319.0" y="1089.0">models.threaded.VillainGenerator</node>
+    <node x="1271.5" y="76.0">models.util.Observable</node>
+    <node x="846.0" y="1793.0">models.factories.villainFactories.BadFlyPersonFactory</node>
+    <node x="459.5" y="1089.0">models.util.MyBuffer</node>
+    <node x="707.0" y="1089.0">controllers.MySerializerController</node>
+    <node x="173.25" y="0.0">views.MyGUI</node>
+    <node x="1014.0" y="713.0">models.people.villains.BadStrongMan</node>
+    <node x="851.0" y="713.0">models.people.heroes.GoodFlyPerson</node>
+    <node x="1307.0" y="226.0">models.threaded.Watcher</node>
+    <node x="1047.0" y="298.0">models.people.villains.SuperVillain</node>
+    <node x="0.0" y="1793.0">models.factories.heroFactories.GoodFlyPersonFactory</node>
+    <node x="729.0" y="310.0">models.people.heroes.SuperHero</node>
+    <node x="688.0" y="713.0">models.people.heroes.GoodStrongMan</node>
+    <node x="726.5" y="1691.0">models.util.VillainFactory</node>
+    <node x="0.0" y="679.0">views.villains.VillainsGUI</node>
+    <node x="429.0" y="1215.0">models.Buffers.MyBuffer</node>
+    <node x="1081.0" y="1089.0">HeroesAndVillainsMain</node>
+    <node x="607.0" y="1793.0">models.factories.villainFactories.BadStrongManFactory</node>
+    <node x="291.0" y="1793.0">models.factories.heroFactories.GoodStrongManFactory</node>
+    <node x="963.75" y="88.0">models.people.SuperPerson</node>
+    <node x="0.0" y="1089.0">controllers.Controller</node>
+    <node x="1015.25" y="0.0">models.people.Person</node>
+    <node x="336.0" y="679.0">views.heroes.HeroesGUI</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="models.threaded.Watcher" target="models.util.Observable">
+      <point x="0.0" y="-218.5" />
+      <point x="60.0" y="50.0" />
+    </edge>
+    <edge source="views.villains.VillainsGUI" target="views.MyGUI">
+      <point x="0.0" y="-182.5" />
+      <point x="158.0" y="654.0" />
+      <point x="248.5" y="654.0" />
+      <point x="-75.25" y="314.5" />
+    </edge>
+    <edge source="models.factories.villainFactories.BadFlyPersonFactory" target="models.util.VillainFactory">
+      <point x="0.0" y="-26.0" />
+      <point x="955.5" y="1768.0" />
+      <point x="890.75" y="1768.0" />
+      <point x="54.75" y="26.0" />
+    </edge>
+    <edge source="models.people.villains.SuperVillain" target="models.util.Observable">
+      <point x="60.0" y="-146.5" />
+      <point x="1227.0" y="201.0" />
+      <point x="1331.5" y="201.0" />
+      <point x="-60.0" y="50.0" />
+    </edge>
+    <edge source="models.factories.heroFactories.GoodFlyPersonFactory" target="models.util.HeroFactory">
+      <point x="0.0" y="-26.0" />
+      <point x="135.5" y="1768.0" />
+      <point x="213.25" y="1768.0" />
+      <point x="-67.75" y="26.0" />
+    </edge>
+    <edge source="models.people.heroes.GoodStrongMan" target="models.people.heroes.SuperHero">
+      <point x="0.0" y="-26.0" />
+      <point x="759.5" y="688.0" />
+      <point x="785.0" y="688.0" />
+      <point x="-56.0" y="134.5" />
+    </edge>
+    <edge source="models.factories.villainFactories.BadStrongManFactory" target="models.util.VillainFactory">
+      <point x="0.0" y="-26.0" />
+      <point x="716.5" y="1768.0" />
+      <point x="781.25" y="1768.0" />
+      <point x="-54.75" y="26.0" />
+    </edge>
+    <edge source="models.Buffers.MyBuffer" target="models.util.MyBuffer">
+      <point x="0.0" y="-98.5" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="models.people.villains.BadFlyPerson" target="models.people.villains.SuperVillain">
+      <point x="0.0" y="-26.0" />
+      <point x="1248.5" y="688.0" />
+      <point x="1227.0" y="688.0" />
+      <point x="60.0" y="146.5" />
+    </edge>
+    <edge source="views.heroes.HeroesGUI" target="views.MyGUI">
+      <point x="0.0" y="-182.5" />
+      <point x="489.5" y="654.0" />
+      <point x="399.0" y="654.0" />
+      <point x="75.25" y="314.5" />
+    </edge>
+    <edge source="models.people.heroes.SuperHero" target="models.util.Observer">
+      <point x="-56.0" y="-134.5" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="models.people.heroes.GoodFlyPerson" target="models.people.heroes.SuperHero">
+      <point x="0.0" y="-26.0" />
+      <point x="922.5" y="688.0" />
+      <point x="897.0" y="688.0" />
+      <point x="56.0" y="134.5" />
+    </edge>
+    <edge source="models.people.villains.BadStrongMan" target="models.people.villains.SuperVillain">
+      <point x="0.0" y="-26.0" />
+      <point x="1085.5" y="688.0" />
+      <point x="1107.0" y="688.0" />
+      <point x="-60.0" y="146.5" />
+    </edge>
+    <edge source="models.people.heroes.SuperHero" target="models.people.SuperPerson">
+      <point x="56.0" y="-134.5" />
+      <point x="897.0" y="201.0" />
+      <point x="1011.5" y="201.0" />
+      <point x="-47.75" y="38.0" />
+    </edge>
+    <edge source="models.factories.heroFactories.GoodStrongManFactory" target="models.util.HeroFactory">
+      <point x="0.0" y="-26.0" />
+      <point x="426.5" y="1768.0" />
+      <point x="348.75" y="1768.0" />
+      <point x="67.75" y="26.0" />
+    </edge>
+    <edge source="models.people.SuperPerson" target="models.people.Person">
+      <point x="0.0" y="-38.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="models.people.villains.SuperVillain" target="models.people.SuperPerson">
+      <point x="-60.0" y="-146.5" />
+      <point x="47.75" y="38.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="601.0" y="865.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

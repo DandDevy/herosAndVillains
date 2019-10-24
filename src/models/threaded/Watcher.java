@@ -85,25 +85,32 @@ public class Watcher implements Runnable, Observable {
             if (e instanceof FileNotFoundException)
                 System.out.println("File not found because watcher has already deleted + " + eventpath);
 
+            else if(e instanceof java.io.WriteAbortedException)
+                System.out.println("That isn't a villain");
+
             else
                 e.printStackTrace();
         }
         if(villain != null){
             try {
                 villain.setPath(eventpath);
+                System.out.println("villain : " + villain);
+
+
+
+
+                SuperHero hero = Controller.getHeroForVillain(villain, buffer);
+
+                villain.registerObserver(hero);
+                villain.notifyObservers();
+                buffer.set(villain);
             } catch (Exception e){
                 e.printStackTrace();
             }
 
-            System.out.println("villain : " + villain);
 
-            buffer.set(villain);
-
-
-            SuperHero hero = Controller.getHeroForVillain(villain, buffer);
-
-            registerObserver(hero);
-            notifyObservers();
+        } else {
+            System.out.println("WATCHER: OH LOOK A HERO! I'LL LEAVE HIM ALONE");
         }
     }
 

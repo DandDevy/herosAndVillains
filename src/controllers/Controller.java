@@ -169,7 +169,8 @@ public class Controller {
         System.out.println("Controller.getVillain: SERIALIZATION_LOCATION + eventpath.toString():  " + SERIALIZATION_LOCATION + eventpath.toString());
         SuperVillain superVillain = null;
         try {
-            superVillain = (SuperVillain) MySerializerController.deSerializeObject(SERIALIZATION_LOCATION + eventpath.toString());
+            Object myObject =  MySerializerController.deSerializeObject(SERIALIZATION_LOCATION + eventpath.toString());
+            superVillain = (SuperVillain) myObject;
         } catch (Exception e){
             if(e instanceof ClassCastException)
                 System.out.println("THAT WAS HERO");

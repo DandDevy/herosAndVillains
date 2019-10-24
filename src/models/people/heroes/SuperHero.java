@@ -81,6 +81,7 @@ public class SuperHero implements Serializable, SuperPerson, Observer, Runnable 
             try {
                 SuperVillain superVillain = myBuffer.get();
 
+                System.out.println(this + " HERE TO KILL " + superVillain);
                 System.out.println("Hero update, villain to beat -->>>" + superVillain);
                 boolean destroyedVillain = Controller.destroyVillain(superVillain.getPath());
                 needsToDealWithVillain = !destroyedVillain;
