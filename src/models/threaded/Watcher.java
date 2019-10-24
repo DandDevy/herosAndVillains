@@ -187,6 +187,9 @@ public class Watcher implements Runnable{
         }
     }
 
+    /**
+     * <p>runs the Watcher thread while keepRunning is true.</p>
+     */
     @Override
     public void run() {
         keepRunning = true;
