@@ -14,7 +14,7 @@ import java.util.List;
  * <h1>SuperVillain</h1>
  * <p>Super villain is just an implementation of SuperPerson</p>
  */
-public class SuperVillain implements Observable, Serializable, SuperPerson {
+public class SuperVillain implements Serializable, SuperPerson {
     private String strength;
     private List<Observer> observerList;
     private Path path;
@@ -49,27 +49,6 @@ public class SuperVillain implements Observable, Serializable, SuperPerson {
         return "SuperVillain{" +
                 " strength='" + strength + '\'' +
                 '}';
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        if(observer != null){
-            this.observerList.add(observer);
-        }
-    }
-
-    @Override
-    public void notifyObservers() {
-        for(Observer observer : observerList){
-            observer.update();
-        }
-    }
-
-    @Override
-    public void removeObserver(Observer observer) {
-        if(observer != null){
-            this.observerList.remove(observer);
-        }
     }
 
     /**

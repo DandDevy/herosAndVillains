@@ -4,33 +4,34 @@ import controllers.Controller;
 import models.Buffers.MyBuffer;
 import models.people.heroes.SuperHero;
 import models.people.villains.SuperVillain;
+import models.util.Observable;
+import models.util.Observer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
  * <h1>WatcherController</h1>
  * <p>This controller watches the common folder for changes</p>
  */
-public class Watcher implements Runnable{
+public class Watcher implements Runnable, Observable {
     private ArrayList<Path> pathArrayList;
     private static final boolean USE_WATCH_SERVICE = false;
     private String filePathString;
     private int delay;
     private boolean keepRunning;
     private MyBuffer buffer;
+    private List<Observer> observerList;
 
     public Watcher(String filePathString, int delay, MyBuffer buffer) {
         this.filePathString = filePathString;
         this.delay = delay;
         this.buffer = buffer;
+        observerList = new ArrayList<Observer>();
     }
 
     /**
@@ -101,8 +102,8 @@ public class Watcher implements Runnable{
 
             SuperHero hero = Controller.getHeroForVillain(villain, buffer);
 
-            villain.registerObserver(hero);
-            villain.notifyObservers();
+            registerObserver(hero);
+            notifyObservers();
         }
     }
 
@@ -198,5 +199,26 @@ public class Watcher implements Runnable{
 
     public void terminate(){
         keepRunning = false;
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        if(observer != null){
+            this.observerList.add(observer);
+        }
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(Observer observer : observerList){
+            observer.update();
+        }
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        if(observer != null){
+            this.observerList.remove(observer);
+        }
     }
 }
