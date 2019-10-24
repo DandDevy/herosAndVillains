@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * <h1>Buffer implements models.util.Buffer</h1>
  * <p>This Buffer is for my producer consumer pattern.</p>
  */
-public class Buffer implements models.util.Buffer {
+public class MyBuffer implements models.util.MyBuffer {
     private final LinkedList<SuperVillain> buffer;
     private ReentrantLock bufferLock = new ReentrantLock(true);
 
@@ -19,9 +19,9 @@ public class Buffer implements models.util.Buffer {
     private Condition notFull = bufferLock.newCondition();
     private Condition notEmpty = bufferLock.newCondition();
 
-    public Buffer() { this.buffer = new LinkedList<SuperVillain>(); }
+    public MyBuffer() { this.buffer = new LinkedList<SuperVillain>(); }
 
-    public Buffer(int maxBufferSizeAllowed) {
+    public MyBuffer(int maxBufferSizeAllowed) {
         this.buffer = new LinkedList<SuperVillain>();
         this.maxBufferSizeAllowed = maxBufferSizeAllowed;
     }
@@ -36,6 +36,7 @@ public class Buffer implements models.util.Buffer {
         bufferLock.lock();
         try {
             while (buffer.size() == maxBufferSizeAllowed){
+                System.out.println("MyBuffer: SET AWAIT TOO FULL");
                 notFull.await();
             }
             buffer.push(villain);
@@ -59,6 +60,7 @@ public class Buffer implements models.util.Buffer {
         try {
 
             while (buffer.size() == 0){
+                System.out.println("MyBuffer: GET AWAIT BUFFER EMPTY");
                 notEmpty.await();
             }
 

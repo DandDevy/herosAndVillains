@@ -1,6 +1,7 @@
 package models.factories;
 
 
+import models.Buffers.MyBuffer;
 import models.people.heroes.GoodFlyPerson;
 import models.people.heroes.GoodStrongMan;
 import models.people.heroes.SuperHero;
@@ -20,14 +21,14 @@ public abstract class PeopleFactory {
      * @param strength
      * @return SuperHero
      */
-    public static SuperHero getHero(String type, String strength){
+    public static SuperHero getHero(String type, String strength, MyBuffer myBuffer){
         SuperHero hero = null;
 
         if(type.equals("Strong"))
-            hero = new GoodStrongMan(strength);
+            hero = new GoodStrongMan(strength, myBuffer);
 
         else if (type.equals("Fly"))
-            hero = new GoodFlyPerson(strength);
+            hero = new GoodFlyPerson(strength, myBuffer);
         return hero;
     }
 

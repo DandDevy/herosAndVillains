@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Buffers.MyBuffer;
 import models.factories.heroFactories.GoodFlyPersonFactory;
 import models.factories.heroFactories.GoodStrongManFactory;
 import models.factories.villainFactories.BadFlyPersonFactory;
@@ -30,6 +31,7 @@ public class Controller {
     private static ArrayList<Thread> threadsOfObservers = new ArrayList<>();
     private static ExecutorService villainGeneratorExecutorService;
     private static ArrayList<VillainGenerator> villainsGeneratorsInThreads = new ArrayList<>();
+    private static final int MAX_BUFFER_SIZE = 1;
 
 
     /**
@@ -37,12 +39,12 @@ public class Controller {
      * @param type
      * @param strength
      */
-    public static void addHero(String type, String strength) {
+    public static void addHero(String type, String strength, MyBuffer myBuffer) {
         SuperHero hero = null;//PeopleFactory.getHero(type, strength);
         if(type.equals("Strong")){
-            hero = new GoodStrongManFactory().getHero(strength);
+            hero = new GoodStrongManFactory().getHero(strength, myBuffer);
         } else if(type.equals("Fly")){
-            hero = new GoodFlyPersonFactory().getHero(strength);
+            hero = new GoodFlyPersonFactory().getHero(strength, myBuffer);
         }
 //        MySerializerController.serializeHero(hero);
 
@@ -113,7 +115,8 @@ public class Controller {
     public static void observe(int delay) {
 
         if(OBSERVE_IN_THREAD) {
-            Watcher watcher = new Watcher(SERIALIZATION_LOCATION, delay);
+            MyBuffer buffer = new MyBuffer(MAX_BUFFER_SIZE);
+            Watcher watcher = new Watcher(SERIALIZATION_LOCATION, delay, buffer);
             Thread observerThread = new Thread(watcher);
             watchersInThreads.add(watcher);
             threadsOfObservers.add(observerThread);
@@ -128,15 +131,15 @@ public class Controller {
      * @param villain
      * @return
      */
-    public static SuperHero getHeroForVillain(SuperVillain villain) {
+    public static SuperHero getHeroForVillain(SuperVillain villain, MyBuffer myBuffer) {
         SuperHero hero = null;
         if(villain instanceof BadFlyPerson){
-            hero = new GoodFlyPersonFactory().getHero(villain.getStrength());
+            hero = new GoodFlyPersonFactory().getHero(villain.getStrength(), myBuffer);
             System.out.println("Controller.getHeroForVillain: This is a BadFlyPerson <--" + villain);
 
         } else if( villain instanceof BadStrongMan){
             BadStrongMan badStrongMan = (BadStrongMan) villain;
-            hero = new GoodStrongManFactory().getHero(villain.getStrength());
+            hero = new GoodStrongManFactory().getHero(villain.getStrength(), myBuffer);
             System.out.println("Controller.getHeroForVillain: This is a BadStrongMan <--" + villain);
         }
 //        try {
@@ -162,7 +165,7 @@ public class Controller {
      * @param eventpath
      * @return
      */
-    private static SuperVillain getVillain(Path eventpath) {
+    public static SuperVillain getVillain(Path eventpath) {
         System.out.println("Controller.getVillain: SERIALIZATION_LOCATION + eventpath.toString():  " + SERIALIZATION_LOCATION + eventpath.toString());
         SuperVillain superVillain = null;
         try {
@@ -182,31 +185,31 @@ public class Controller {
      * <p>handle a villain when is found in the common folder</p>
      * @param eventpath
      */
-    public static void dealWithVillain(Path eventpath) {
-        SuperVillain villain = null;
-        try {
-            villain = getVillain(eventpath);
-        } catch (Exception e){
-
-            if (e instanceof FileNotFoundException)
-                System.out.println("File not found because watcher has already deleted + " + eventpath);
-
-            else
-                e.printStackTrace();
-        }
-        if(villain != null){
-            try {
-                villain.setPath(eventpath);
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-
-            System.out.println("villain : " + villain);
-
-            SuperHero hero = getHeroForVillain(villain);
-            villain.registerObserver(hero);
-            villain.notifyObservers();
-        }
+//    public static void dealWithVillain(Path eventpath) {
+//        SuperVillain villain = null;
+//        try {
+//            villain = getVillain(eventpath);
+//        } catch (Exception e){
+//
+//            if (e instanceof FileNotFoundException)
+//                System.out.println("File not found because watcher has already deleted + " + eventpath);
+//
+//            else
+//                e.printStackTrace();
+//        }
+//        if(villain != null){
+//            try {
+//                villain.setPath(eventpath);
+//            } catch (Exception e){
+//                e.printStackTrace();
+//            }
+//
+//            System.out.println("villain : " + villain);
+//
+//            SuperHero hero = getHeroForVillain(villain);
+//            villain.registerObserver(hero);
+//            villain.notifyObservers();
+//        }
 
 
 
@@ -214,23 +217,25 @@ public class Controller {
 //        hero.update(villain, eventpath);
 //        defeatVillain(eventpath);
 //        removeFile(eventpath);
-    }
+//    }
 
 
     /**
      * <p>destroys villain file.</p>
      * @param eventpath
      */
-    public static void destroyVillain(Path eventpath) {
+    public static boolean destroyVillain(Path eventpath) {
      // destroy file SERIALIZATION_LOCATION + eventpath.toString()
         File fileToDestroy = new File(SERIALIZATION_LOCATION + eventpath.toString());
         if(fileToDestroy.delete())
         {
             System.out.println("File deleted successfully");
+            return true;
         }
         else
         {
             System.out.println("Failed to delete the file");
+            return false;
         }
     }
 

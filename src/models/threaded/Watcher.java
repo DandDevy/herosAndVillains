@@ -1,8 +1,12 @@
 package models.threaded;
 
 import controllers.Controller;
+import models.Buffers.MyBuffer;
+import models.people.heroes.SuperHero;
+import models.people.villains.SuperVillain;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -21,10 +25,12 @@ public class Watcher implements Runnable{
     private String filePathString;
     private int delay;
     private static boolean keepRunning;
+    private static MyBuffer buffer;
 
-    public Watcher(String filePathString, int delay) {
+    public Watcher(String filePathString, int delay, MyBuffer buffer) {
         this.filePathString = filePathString;
         this.delay = delay;
+        this.buffer = buffer;
     }
 
     /**
@@ -53,7 +59,8 @@ public class Watcher implements Runnable{
             System.out.println("WatcherController: villainSS here ->>" + pathArrayList + "\n\n");
             for (Path eventpath : pathArrayList) {
                 try {
-                    Controller.dealWithVillain(eventpath);
+//                    Controller.dealWithVillain(eventpath);
+                    dealWithFound(eventpath);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -68,8 +75,39 @@ public class Watcher implements Runnable{
         }
     }
 
+    private static void dealWithFound(Path eventpath) throws InterruptedException {
+        SuperVillain villain = null;
+        try {
+            villain = Controller.getVillain(eventpath);
+        } catch (Exception e){
+
+            if (e instanceof FileNotFoundException)
+                System.out.println("File not found because watcher has already deleted + " + eventpath);
+
+            else
+                e.printStackTrace();
+        }
+        if(villain != null){
+            try {
+                villain.setPath(eventpath);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+            System.out.println("villain : " + villain);
+
+            buffer.set(villain);
+
+
+            SuperHero hero = Controller.getHeroForVillain(villain, buffer);
+
+            villain.registerObserver(hero);
+            villain.notifyObservers();
+        }
+    }
+
     /**
-     * <p>Uses watchService to watch for changes.</p>
+     * <p>Use watchService if we want to watch for changes as an alternative.</p>
      * @param filePathString
      * @param delay
      */
@@ -116,7 +154,7 @@ public class Watcher implements Runnable{
                             TimeUnit.MILLISECONDS.sleep(200);
 
                             System.out.println("WatcherController: villain here ->>" + eventpath);
-                            Controller.dealWithVillain(eventpath);
+                            dealWithFound(eventpath);
                         }
                     } catch (Exception e){
                         e.printStackTrace();

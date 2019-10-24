@@ -3,7 +3,7 @@ package models.util;
 
 import models.people.villains.SuperVillain;
 
-public interface Buffer {
+public interface MyBuffer {
 
     public void set(SuperVillain villain) throws InterruptedException;
 

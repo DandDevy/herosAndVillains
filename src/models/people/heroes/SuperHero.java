@@ -3,24 +3,28 @@ package models.people.heroes;
 import controllers.Controller;
 import models.people.SuperPerson;
 import models.people.villains.SuperVillain;
+import models.util.MyBuffer;
 import models.util.Observer;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * <h1>SuperHero</h1>
  * <p>SuperHero is just an implementation of SuperPerson</p>
  */
-public class SuperHero implements Serializable, SuperPerson, Observer {
+public class SuperHero implements Serializable, SuperPerson, Observer, Runnable {
     private String strength;
     private String villainLocation;
+    private MyBuffer myBuffer;
 
     /**
      * <p>You need strength for a SuperHero</p>
      * @param strength
      */
-    public SuperHero(String strength) {
+    public SuperHero(String strength, MyBuffer myBuffer) {
         this.strength = strength;
+        this.myBuffer = myBuffer;
     }
 
     /**
@@ -64,8 +68,26 @@ public class SuperHero implements Serializable, SuperPerson, Observer {
     }
 
     @Override
-    public void update(SuperVillain superVillain) {
-        System.out.println("Hero update, villain to beat -->>>" + superVillain);
-        Controller.destroyVillain(superVillain.getPath());
+    public void update() {
+        Thread thread = new Thread(this);
+        thread.start();
+
+    }
+
+    @Override
+    public void run() {
+        boolean needsToDealWithVillain = true;
+        while (needsToDealWithVillain){
+            try {
+                SuperVillain superVillain = myBuffer.get();
+
+                System.out.println("Hero update, villain to beat -->>>" + superVillain);
+                needsToDealWithVillain = Controller.destroyVillain(superVillain.getPath());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
+        }
     }
 }

@@ -4,7 +4,10 @@ import controllers.Controller;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
+import models.Buffers.MyBuffer;
 import views.MyGUI;
+
+import java.nio.Buffer;
 
 /**
  * <h1>HeroesGUI</h1>
@@ -48,7 +51,7 @@ public class HeroesGUI extends MyGUI {
             }else {
                 heroType = "Fly";
             }
-            Controller.addHero(heroType, super.getAddSuperPersonStrengthTF().getText());
+            Controller.addHero(heroType, super.getAddSuperPersonStrengthTF().getText(), new MyBuffer());
 
 
         });

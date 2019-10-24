@@ -61,7 +61,7 @@ public class SuperVillain implements Observable, Serializable, SuperPerson {
     @Override
     public void notifyObservers() {
         for(Observer observer : observerList){
-            observer.update(this);
+            observer.update();
         }
     }
 
