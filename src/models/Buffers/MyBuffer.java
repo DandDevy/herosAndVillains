@@ -2,6 +2,7 @@ package models.Buffers;
 
 import models.people.villains.SuperVillain;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -10,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * <h1>Buffer implements models.util.Buffer</h1>
  * <p>This Buffer is for my producer consumer pattern.</p>
  */
-public class MyBuffer implements models.util.MyBuffer {
+public class MyBuffer implements models.util.MyBuffer, Serializable {
     private final LinkedList<SuperVillain> buffer;
     private ReentrantLock bufferLock = new ReentrantLock(true);
 
