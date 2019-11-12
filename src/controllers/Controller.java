@@ -8,6 +8,8 @@ import models.people.heroes.SuperHero;
 import models.people.villains.BadFlyPerson;
 import models.people.villains.BadStrongMan;
 import models.people.villains.SuperVillain;
+import models.singletons.ServerSocketSingleton;
+import models.threaded.SocketWatcher;
 import models.threaded.VillainGenerator;
 import models.threaded.Watcher;
 
@@ -22,6 +24,8 @@ public class Controller {
     private static final String SERIALIZATION_LOCATION = "src\\common\\"; //reminder: C:\Users\Dashc\IdeaProjects\IdeaThirdYearProjects\distributedSystemProgramming\herosAndVillains\herosAndVillains\
     private static final String FOLDER = SERIALIZATION_LOCATION + "battle-zone-";
     private static final String SER_fILE_ENDING = ".ser";
+    private static final boolean OBSERVE_SOCKET = true;
+    private static final int PORT = 8753;
     private static int battleFileNumber = 0;
     private static final boolean GENERATE_IN_THREAD = true;
     private static final boolean OBSERVE_IN_THREAD = true;
@@ -111,15 +115,22 @@ public class Controller {
      * @param delay
      */
     public static void observe(int delay) {
-        if(OBSERVE_IN_THREAD) {
-            Watcher watcher = new Watcher(SERIALIZATION_LOCATION, delay);
-            Thread observerThread = new Thread(watcher);
-            watchersInThreads.add(watcher);
-            threadsOfObservers.add(observerThread);
-            observerThread.start();
+        if(OBSERVE_SOCKET){
+//            ServerSocketSingleton serverSocket = ServerSocketSingleton.getServerSocketSingleton(PORT);
+
+//            SocketWatcher socketWatcher = new SocketWatcher(serverSocket.openSocket());
+        } else {
+            if(OBSERVE_IN_THREAD) {
+                Watcher watcher = new Watcher(SERIALIZATION_LOCATION, delay);
+                Thread observerThread = new Thread(watcher);
+                watchersInThreads.add(watcher);
+                threadsOfObservers.add(observerThread);
+                observerThread.start();
 //            observerExecutorService.execute(observerThread);
-        } else
-            Watcher.watch(SERIALIZATION_LOCATION, delay);
+            } else
+                Watcher.watch(SERIALIZATION_LOCATION, delay);
+        }
+
     }
 
     /**
