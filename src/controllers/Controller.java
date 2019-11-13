@@ -8,13 +8,16 @@ import models.people.heroes.SuperHero;
 import models.people.villains.BadFlyPerson;
 import models.people.villains.BadStrongMan;
 import models.people.villains.SuperVillain;
-import models.singletons.ServerSocketSingleton;
-import models.threaded.SocketWatcher;
+import models.sockets.ClientSocket;
+import models.sockets.ServerSocketSingleton;
+import models.threaded.ClientSocketWatcher;
 import models.threaded.VillainGenerator;
 import models.threaded.Watcher;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -25,7 +28,9 @@ public class Controller {
     private static final String FOLDER = SERIALIZATION_LOCATION + "battle-zone-";
     private static final String SER_fILE_ENDING = ".ser";
     private static final boolean OBSERVE_SOCKET = true;
-    private static final int PORT = 8753;
+    private static final boolean USE_SOCKETS = true;
+    public static final String SERVER_ADDRESS = "localhost";
+    public static final int SERVER_PORT = 8731;
     private static int battleFileNumber = 0;
     private static final boolean GENERATE_IN_THREAD = true;
     private static final boolean OBSERVE_IN_THREAD = true;
@@ -74,6 +79,24 @@ public class Controller {
 
         MySerializerController.serializeObject(villain, FOLDER + getBattleFileNumberUpdated() + SER_fILE_ENDING);
         System.out.println("controller.addVillain: "+ villain + " has been serialized");
+
+
+
+        if (USE_SOCKETS){
+            System.out.println("use sockets for add villain");
+            ServerSocketSingleton myServerSocket = ServerSocketSingleton.getInstance();
+            myServerSocket.openSocket();
+            ObjectOutputStream objectOutputStream = myServerSocket.getObjectOutputStream();
+            try {
+                objectOutputStream.writeObject(villain);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static synchronized void writeToServer(Object object){
+
     }
 
     /**
@@ -92,11 +115,14 @@ public class Controller {
      */
     public static void generateVillain(int delay, String type, String strength) {
         if(GENERATE_IN_THREAD){
+
             VillainGenerator villainGenerator = new VillainGenerator(delay, type, strength);
             Thread villainGeneratingThread = new Thread(villainGenerator);
             villainGeneratingThread.start();
 //            villainGeneratorExecutorService.execute(villainGeneratingThread);
             villainsGeneratorsInThreads.add(villainGenerator);
+
+
         } else {
             while(true){
                 addVillain(type, strength);
@@ -115,21 +141,29 @@ public class Controller {
      * @param delay
      */
     public static void observe(int delay) {
-        if(OBSERVE_SOCKET){
-//            ServerSocketSingleton serverSocket = ServerSocketSingleton.getServerSocketSingleton(PORT);
 
-//            SocketWatcher socketWatcher = new SocketWatcher(serverSocket.openSocket());
-        } else {
-            if(OBSERVE_IN_THREAD) {
+        if(OBSERVE_IN_THREAD) {
+
+            if (USE_SOCKETS){
+                ClientSocket clientSocket = new ClientSocket(SERVER_ADDRESS, SERVER_PORT);
+                ClientSocketWatcher clientSocketWatcher = new ClientSocketWatcher(clientSocket, delay);
+                Thread clientSocketWatcherThread = new Thread(clientSocketWatcher);
+                clientSocketWatcherThread.start();
+
+
+            } else {
                 Watcher watcher = new Watcher(SERIALIZATION_LOCATION, delay);
                 Thread observerThread = new Thread(watcher);
                 watchersInThreads.add(watcher);
                 threadsOfObservers.add(observerThread);
                 observerThread.start();
 //            observerExecutorService.execute(observerThread);
-            } else
-                Watcher.watch(SERIALIZATION_LOCATION, delay);
-        }
+            }
+
+
+        } else
+            Watcher.watch(SERIALIZATION_LOCATION, delay);
+
 
     }
 

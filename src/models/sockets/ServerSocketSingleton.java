@@ -1,12 +1,13 @@
-package models.singletons;
+package models.sockets;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import static controllers.Controller.SERVER_PORT;
+
 public class ServerSocketSingleton {
-    public static final int PORT = 8731;
-    private static ServerSocketSingleton serverSocketSingleton = new ServerSocketSingleton(PORT);
+    private static ServerSocketSingleton serverSocketSingleton = new ServerSocketSingleton(SERVER_PORT);
 
     private Socket socket = null;
     private ServerSocket server = null;
@@ -44,11 +45,11 @@ public class ServerSocketSingleton {
         }
     }
 
-    public DataInputStream getDataInputStream(){
-        DataInputStream resultingDataStream = null;
+    public ObjectInputStream getObjectInputStream(){
+        ObjectInputStream resultingDataStream = null;
         if(!isSocketClosed) {
             try {
-                resultingDataStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                resultingDataStream = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -56,11 +57,11 @@ public class ServerSocketSingleton {
         return resultingDataStream;
     }
 
-    public DataOutputStream getDataOutputStream(){
-        DataOutputStream resultingDataOutputSteam = null;
+    public ObjectOutputStream getObjectOutputStream(){
+        ObjectOutputStream resultingDataOutputSteam = null;
         if(!isSocketClosed){
             try {
-                resultingDataOutputSteam = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+                resultingDataOutputSteam = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -76,4 +77,16 @@ public class ServerSocketSingleton {
             e.printStackTrace();
         }
     }
+
+    public void writeObject(Object object){
+        ServerSocketSingleton myServerSocket = ServerSocketSingleton.getInstance();
+        myServerSocket.openSocket();
+        ObjectOutputStream objectOutputStream = myServerSocket.getObjectOutputStream();
+        try {
+            objectOutputStream.writeObject(object);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
