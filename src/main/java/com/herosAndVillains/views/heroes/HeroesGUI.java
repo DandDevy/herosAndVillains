@@ -4,6 +4,7 @@ import main.java.com.herosAndVillains.controllers.Controller;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
+import main.java.com.herosAndVillains.controllers.ClientSocketControllerForHeroes;
 import main.java.com.herosAndVillains.views.MyGUI;
 
 /**
@@ -25,21 +26,22 @@ public class HeroesGUI extends MyGUI {
     private static final String STOP_ALL_OBSERVATIONS = "Stop all observations";
     private Button addHeroBtn, observingDelayBtn;
 
-    public HeroesGUI() {
+    public HeroesGUI(boolean useSockets) {
         super(
                 ENTER_YOUR_HERO_TYPE,STONG_HERO, FLY_HERO, ENTER_YOUR_HERO_STRENGTH, COLOUR,
                 ENTER_YOUR_DELAY_OF_OBSERVING, ADD_PERSON_BTN_TEXT,
                 DELAY_BTN_TEXT, DEFAULT_DELAY,
                 STOP_ALL_OBSERVATIONS);
-        setButtons();
+        setButtons(useSockets);
     }
 
     public HBox getPrimaryLayout(){
         return super.getPrimaryLayout();
     }
 
-    private void setButtons(){
+    private void setButtons(boolean useSockets){
         super.getAddSuperPersonBtn().setOnAction(event -> {
+
             System.out.println("User wishes to add a user!!");
 
             String heroType;
@@ -48,18 +50,28 @@ public class HeroesGUI extends MyGUI {
             }else {
                 heroType = "Fly";
             }
-            Controller.addHero(heroType, super.getAddSuperPersonStrengthTF().getText());
+            if(!useSockets)
+                Controller.addHero(heroType, super.getAddSuperPersonStrengthTF().getText());
+            else
+                ClientSocketControllerForHeroes.addHero(heroType, super.getAddSuperPersonStrengthTF().getText());
 
 
         });
 
         super.getDelayBtn().setOnAction(event -> {
             System.out.println("User wishes to observe at " + super.getDelay() + " seconds");
-            Controller.observe(super.getDelay());
+            if(!useSockets)
+                Controller.observe(super.getDelay());
+            else
+                ClientSocketControllerForHeroes.observe(super.getDelay());
         });
 
         super.getStopMyThreads().setOnAction(event -> {
-            Controller.stopObservations();
+            System.out.println("User wishes stop all observations");
+            if(!useSockets)
+                Controller.stopObservations();
+            else
+                ClientSocketControllerForHeroes.stopObservations();
         });
     }
 

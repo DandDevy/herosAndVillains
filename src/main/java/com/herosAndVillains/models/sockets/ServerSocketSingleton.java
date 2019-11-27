@@ -79,9 +79,7 @@ public class ServerSocketSingleton {
     }
 
     public void writeObject(Object object){
-        ServerSocketSingleton myServerSocket = ServerSocketSingleton.getInstance();
-        myServerSocket.openSocket();
-        ObjectOutputStream objectOutputStream = myServerSocket.getObjectOutputStream();
+        ObjectOutputStream objectOutputStream = getObjectOutputStream();
         try {
             objectOutputStream.writeObject(object);
         } catch (IOException e) {

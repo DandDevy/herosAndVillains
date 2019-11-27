@@ -27,8 +27,7 @@ public class Controller {
     private static final String SERIALIZATION_LOCATION = "src\\common\\"; //reminder: C:\Users\Dashc\IdeaProjects\IdeaThirdYearProjects\distributedSystemProgramming\herosAndVillains\herosAndVillains\
     private static final String FOLDER = SERIALIZATION_LOCATION + "battle-zone-";
     private static final String SER_fILE_ENDING = ".ser";
-    private static final boolean OBSERVE_SOCKET = true;
-    private static final boolean USE_SOCKETS = true;
+    private static final boolean USE_SOCKETS = false;
     public static final String SERVER_ADDRESS = "localhost";
     public static final int SERVER_PORT = 8731;
     private static int battleFileNumber = 0;

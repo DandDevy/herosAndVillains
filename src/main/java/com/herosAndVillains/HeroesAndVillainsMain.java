@@ -11,6 +11,7 @@ public class HeroesAndVillainsMain extends Application {
     private static final int HEIGHT = 180;
     private static final String HEROES_TITLE = "HEROES - Daniel Ashcroft";
     private static final String VILLAINS_TITLE = "VILLAINS - Daniel Ashcroft";
+    private static final boolean USE_SOCKETS = false;
 
     @Override
     public void start(Stage heroStage) throws Exception {
@@ -18,7 +19,7 @@ public class HeroesAndVillainsMain extends Application {
         //first stage for heroes
         heroStage.setTitle(HEROES_TITLE);
         heroStage.setScene(new Scene(
-                new HeroesGUI().getPrimaryLayout(),
+                new HeroesGUI(USE_SOCKETS).getPrimaryLayout(),
                 WIDTH, HEIGHT
         ));
         heroStage.show();
@@ -27,7 +28,7 @@ public class HeroesAndVillainsMain extends Application {
         Stage villainStage = new Stage();
         villainStage.setTitle(VILLAINS_TITLE);
         villainStage.setScene(new Scene(
-                new VillainsGUI().getPrimaryLayout(),
+                new VillainsGUI(USE_SOCKETS).getPrimaryLayout(),
                 WIDTH, HEIGHT
         ));
         villainStage.show();

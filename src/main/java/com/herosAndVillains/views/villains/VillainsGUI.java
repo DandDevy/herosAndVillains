@@ -1,5 +1,6 @@
 package main.java.com.herosAndVillains.views.villains;
 
+import main.java.com.herosAndVillains.controllers.ServerSocketControllerForVillains;
 import main.java.com.herosAndVillains.controllers.Controller;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -24,20 +25,20 @@ public class VillainsGUI extends MyGUI {
     private static final String STOP_ALL_GENERATIONS = "Stop all generations";
     private Button addHeroBtn, observingDelayBtn;
 
-    public VillainsGUI() {
+    public VillainsGUI(boolean useSockets) {
         super(
                 ENTER_YOUR_VILLAIN_TYPE, STRONG_VILLAIN, FLYING_VILLAIN, ENTER_YOUR_VILLAIN_STRENGTH, COLOUR,
                 ENTER_YOUR_DELAY_OF_GENERATING, ADD_PERSON_BTN_TEXT,
                 DELAY_BTN_TEXT, DEFAULT_DELAY,
                 STOP_ALL_GENERATIONS);
-        setButtons();
+        setButtons(useSockets);
     }
 
     public HBox getPrimaryLayout(){
         return super.getPrimaryLayout();
     }
 
-    private void setButtons(){
+    private void setButtons(boolean useSockets){
         super.getAddSuperPersonBtn().setOnAction(event -> {
             System.out.println("User wishes to add a user!!");
 
@@ -47,8 +48,10 @@ public class VillainsGUI extends MyGUI {
             }else {
                 villainType = "Fly";
             }
-            Controller.addVillain(villainType, super.getAddSuperPersonStrengthTF().getText());
-
+            if(!useSockets)
+                Controller.addVillain(villainType, super.getAddSuperPersonStrengthTF().getText());
+            else
+                ServerSocketControllerForVillains.addVillain(villainType, super.getAddSuperPersonStrengthTF().getText());
 
         });
 
@@ -60,12 +63,19 @@ public class VillainsGUI extends MyGUI {
                 villainType = "Fly";
             }
             System.out.println("User wishes to generate at " + super.getDelay() + " seconds");
-            Controller.generateVillain(super.getDelay(),villainType, super.getAddSuperPersonStrengthTF().getText());
+
+            if(!useSockets)
+                Controller.generateVillain(super.getDelay(),villainType, super.getAddSuperPersonStrengthTF().getText());
+            else
+                ServerSocketControllerForVillains.generateVillain(super.getDelay(),villainType, super.getAddSuperPersonStrengthTF().getText());
         });
 
         super.getStopMyThreads().setOnAction(event -> {
             System.out.println("STOP MY GENERATIONS");
-            Controller.stopGenerations();
+            if(!useSockets)
+                Controller.stopGenerations();
+            else
+                ServerSocketControllerForVillains.stopGenerations();
         });
     }
 
