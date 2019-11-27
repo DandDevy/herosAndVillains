@@ -23,6 +23,7 @@ public class VillainsGUI extends MyGUI {
     private static final String DELAY_BTN_TEXT = "Or generate at this delay";
     private static final String DEFAULT_DELAY = "1";
     private static final String STOP_ALL_GENERATIONS = "Stop all generations";
+    private static final String CLOSE_ALL_TEXT = "Close everything(server)";
     private Button addHeroBtn, observingDelayBtn;
 
     public VillainsGUI(boolean useSockets) {
@@ -30,7 +31,7 @@ public class VillainsGUI extends MyGUI {
                 ENTER_YOUR_VILLAIN_TYPE, STRONG_VILLAIN, FLYING_VILLAIN, ENTER_YOUR_VILLAIN_STRENGTH, COLOUR,
                 ENTER_YOUR_DELAY_OF_GENERATING, ADD_PERSON_BTN_TEXT,
                 DELAY_BTN_TEXT, DEFAULT_DELAY,
-                STOP_ALL_GENERATIONS);
+                STOP_ALL_GENERATIONS, CLOSE_ALL_TEXT);
         setButtons(useSockets);
     }
 
@@ -76,6 +77,10 @@ public class VillainsGUI extends MyGUI {
                 Controller.stopGenerations();
             else
                 ServerSocketControllerForVillains.stopGenerations();
+        });
+
+        super.getClose().setOnAction(event -> {
+            System.out.println("close everything (socket server!)");
         });
     }
 

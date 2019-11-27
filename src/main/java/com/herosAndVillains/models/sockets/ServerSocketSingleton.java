@@ -4,15 +4,14 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import static main.java.com.herosAndVillains.controllers.Controller.SERVER_PORT;
-
 public class ServerSocketSingleton {
-    private static ServerSocketSingleton serverSocketSingleton = new ServerSocketSingleton(SERVER_PORT);
+    private static final int SERVER_PORT = 8753;
+    private static ServerSocketSingleton serverSocketSingleton;
 
     private Socket socket = null;
     private ServerSocket server = null;
     private DataInputStream in = null;
-    private static boolean classInitialed = false;
+    private static boolean serverInitialised = false;
     private  boolean isSocketClosed = true;
 
     private ServerSocketSingleton(int port){
@@ -29,7 +28,14 @@ public class ServerSocketSingleton {
 
 
     public static ServerSocketSingleton getInstance(){
-        return serverSocketSingleton;
+        if (serverInitialised)
+            return serverSocketSingleton;
+
+        else {
+            serverSocketSingleton = new ServerSocketSingleton(SERVER_PORT);
+            serverInitialised = true;
+            return serverSocketSingleton;
+        }
     }
 
     public void openSocket() {
@@ -73,6 +79,15 @@ public class ServerSocketSingleton {
         try {
             socket.close();
             isSocketClosed = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void closeServer(){
+        try {
+            server.close();
+            serverInitialised = false;
         } catch (IOException e) {
             e.printStackTrace();
         }

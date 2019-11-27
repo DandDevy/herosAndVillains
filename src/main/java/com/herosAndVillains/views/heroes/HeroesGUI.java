@@ -24,6 +24,7 @@ public class HeroesGUI extends MyGUI {
     private static final String DELAY_BTN_TEXT = "observe for villains at this delay";
     private static final String DEFAULT_DELAY = "0";
     private static final String STOP_ALL_OBSERVATIONS = "Stop all observations";
+    private static final String CLOSE_ALL_TEXT = "close";
     private Button addHeroBtn, observingDelayBtn;
 
     public HeroesGUI(boolean useSockets) {
@@ -31,7 +32,7 @@ public class HeroesGUI extends MyGUI {
                 ENTER_YOUR_HERO_TYPE,STONG_HERO, FLY_HERO, ENTER_YOUR_HERO_STRENGTH, COLOUR,
                 ENTER_YOUR_DELAY_OF_OBSERVING, ADD_PERSON_BTN_TEXT,
                 DELAY_BTN_TEXT, DEFAULT_DELAY,
-                STOP_ALL_OBSERVATIONS);
+                STOP_ALL_OBSERVATIONS,CLOSE_ALL_TEXT);
         setButtons(useSockets);
     }
 
