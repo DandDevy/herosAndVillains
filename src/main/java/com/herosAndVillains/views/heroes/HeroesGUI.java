@@ -24,7 +24,7 @@ public class HeroesGUI extends MyGUI {
     private static final String DELAY_BTN_TEXT = "observe for villains at this delay";
     private static final String DEFAULT_DELAY = "0";
     private static final String STOP_ALL_OBSERVATIONS = "Stop all observations";
-    private static final String CLOSE_ALL_TEXT = "close";
+    private static final String CLOSE_ALL_TEXT = "close everything";
     private Button addHeroBtn, observingDelayBtn;
 
     public HeroesGUI(boolean useSockets) {
@@ -46,7 +46,7 @@ public class HeroesGUI extends MyGUI {
             System.out.println("User wishes to add a user!!");
 
             String heroType;
-            if(getAddSuperPersonTypeSting() == "v1"){
+            if(getAddSuperPersonTypeSting().equals("v1")){
                 heroType = "Strong";
             }else {
                 heroType = "Fly";
@@ -73,6 +73,13 @@ public class HeroesGUI extends MyGUI {
                 Controller.stopObservations();
             else
                 ClientSocketControllerForHeroes.stopObservations();
+        });
+
+        super.getClose().setOnAction(event -> {
+            System.out.println("close everything (socket server!)");
+            if(useSockets){
+                ClientSocketControllerForHeroes.closeAll();
+            }
         });
     }
 

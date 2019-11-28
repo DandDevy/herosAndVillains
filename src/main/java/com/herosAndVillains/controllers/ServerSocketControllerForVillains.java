@@ -3,6 +3,7 @@ package main.java.com.herosAndVillains.controllers;
 import main.java.com.herosAndVillains.models.factories.villainFactories.BadFlyPersonFactory;
 import main.java.com.herosAndVillains.models.factories.villainFactories.BadStrongManFactory;
 import main.java.com.herosAndVillains.models.people.villains.SuperVillain;
+import main.java.com.herosAndVillains.models.sockets.ServerSocketSingleton;
 
 public class ServerSocketControllerForVillains {
 
@@ -22,6 +23,8 @@ public class ServerSocketControllerForVillains {
 
         MySerializerController.serializeObject(villain, FOLDER + getBattleFileNumberUpdated() + SER_fILE_ENDING);
         System.out.println("controller.addVillain: "+ villain + " has been serialized");
+        ServerSocketSingleton serverSocket = ServerSocketSingleton.getInstance();
+        serverSocket.openSocket();
     }
     public static synchronized int getBattleFileNumberUpdated(){
         return battleFileNumber++;
@@ -32,6 +35,10 @@ public class ServerSocketControllerForVillains {
     }
 
     public static void stopGenerations() {
+
+    }
+
+    public static void closeAll() {
 
     }
 }

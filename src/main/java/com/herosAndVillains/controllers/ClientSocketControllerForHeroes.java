@@ -12,4 +12,8 @@ public class ClientSocketControllerForHeroes {
     public static void stopObservations() {
 
     }
+
+    public static void closeAll() {
+
+    }
 }

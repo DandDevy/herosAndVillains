@@ -5,6 +5,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerSocketSingleton {
+    /**
+     * <p>SERVER_PORT = 8753</p>
+     */
     private static final int SERVER_PORT = 8753;
     private static ServerSocketSingleton serverSocketSingleton;
 
@@ -26,7 +29,10 @@ public class ServerSocketSingleton {
     }
 
 
-
+    /**
+     * <p>Get instance of ServerSocketSingleton.</p>
+     * @return ServerSocketSingleton
+     */
     public static ServerSocketSingleton getInstance(){
         if (serverInitialised)
             return serverSocketSingleton;
@@ -38,7 +44,12 @@ public class ServerSocketSingleton {
         }
     }
 
-    public void openSocket() {
+    /**
+     * <p>Open a Socket and accept client on this server. Returns a boolean of if the socket was already opened. Only 1 allowed.</p>
+     * @return boolean isSocketClosed
+     */
+    public boolean openSocket() {
+        boolean res = isSocketClosed;
         if(isSocketClosed){
             try {
                 socket = server.accept();
@@ -48,9 +59,16 @@ public class ServerSocketSingleton {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            System.out.println("ServerSocketSingleton: a socket is already in use");
         }
+        return res;
     }
 
+    /**
+     * <p>Get an ObjectInputStream to use on the socket on this server.</p>
+     * @return ObjectInputStream
+     */
     public ObjectInputStream getObjectInputStream(){
         ObjectInputStream resultingDataStream = null;
         if(!isSocketClosed) {
@@ -63,6 +81,10 @@ public class ServerSocketSingleton {
         return resultingDataStream;
     }
 
+    /**
+     * <p>Get an ObjectOutputStream to use on the socket on this server.</p>
+     * @return ObjectOutputStream
+     */
     public ObjectOutputStream getObjectOutputStream(){
         ObjectOutputStream resultingDataOutputSteam = null;
         if(!isSocketClosed){
@@ -71,10 +93,15 @@ public class ServerSocketSingleton {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            System.out.println("ServerSocketSingleton: Socket hasn't been opened yet!");
         }
         return resultingDataOutputSteam;
     }
 
+    /**
+     * <p>Close the socket on this port.</p>
+     */
     public void closeSocket(){
         try {
             socket.close();
@@ -84,6 +111,9 @@ public class ServerSocketSingleton {
         }
     }
 
+    /**
+     * <p>Close the server and release the port.</p>
+     */
     public void closeServer(){
         try {
             server.close();
@@ -93,6 +123,10 @@ public class ServerSocketSingleton {
         }
     }
 
+    /**
+     * <p>Write an object to the socket.</p>
+     * @param object
+     */
     public void writeObject(Object object){
         ObjectOutputStream objectOutputStream = getObjectOutputStream();
         try {
