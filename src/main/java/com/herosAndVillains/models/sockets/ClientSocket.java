@@ -9,6 +9,11 @@ public class ClientSocket {
     private ObjectInputStream input = null;
     private ObjectOutputStream out = null;
 
+    /**
+     * <p>ClientSocket takes a String address and an int port. Creates a socket that can be take inputs and outputs.</p>
+     * @param address
+     * @param port
+     */
     public ClientSocket(String address, int port) {
 
         try
@@ -27,6 +32,10 @@ public class ClientSocket {
         }
     }
 
+    /**
+     * <p>write an object to the socket.</p>
+     * @param object
+     */
     public synchronized void writeObject(Object object){
         try {
             out.writeObject(object);
@@ -35,6 +44,10 @@ public class ClientSocket {
         }
     }
 
+    /**
+     * <p>Returns an object from the socket.</p>
+     * @return Object output
+     */
     public synchronized Object readObject(){
         try {
             return input.readObject();

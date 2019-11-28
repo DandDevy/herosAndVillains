@@ -25,6 +25,9 @@ public class ServerSocketControllerForVillains {
         System.out.println("controller.addVillain: "+ villain + " has been serialized");
         ServerSocketSingleton serverSocket = ServerSocketSingleton.getInstance();
         serverSocket.openSocket();
+        serverSocket.writeObject(villain);
+        serverSocket.closeSocket();
+        serverSocket.closeServer();
     }
     public static synchronized int getBattleFileNumberUpdated(){
         return battleFileNumber++;
