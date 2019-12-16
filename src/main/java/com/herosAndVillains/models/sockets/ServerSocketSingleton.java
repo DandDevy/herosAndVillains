@@ -5,6 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerSocketSingleton {
+
+
     /**
      * <p>SERVER_PORT = 8753</p>
      */
@@ -89,7 +91,7 @@ public class ServerSocketSingleton {
         ObjectOutputStream resultingDataOutputSteam = null;
         if(!isSocketClosed){
             try {
-                resultingDataOutputSteam = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+                resultingDataOutputSteam = new ObjectOutputStream(socket.getOutputStream());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -128,12 +130,39 @@ public class ServerSocketSingleton {
      * @param object
      */
     public void writeObject(Object object){
-        ObjectOutputStream objectOutputStream = getObjectOutputStream();
-        try {
-            objectOutputStream.writeObject(object);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(!isSocketClosed) {
+            ObjectOutputStream objectOutputStream = getObjectOutputStream();
+            try {
+                objectOutputStream.writeObject(object);
+                System.out.println("ServerSocketSingleton.writeObject : " + object + " written to socket");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
+    /**
+     * <p>Read an object from the socket.</p>
+     * @return
+     */
+    public Object readObject(){
+        Object object = null;
+        if(!isSocketClosed) {
+            ObjectInputStream objectOutputStream = getObjectInputStream();
+            try {
+                object = objectOutputStream.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return object;
+    }
+
+    /**
+     * returns an int of the server port.
+     * @return SERVER_PORT
+     */
+    public static int getServerPort() {
+        return SERVER_PORT;
+    }
 }

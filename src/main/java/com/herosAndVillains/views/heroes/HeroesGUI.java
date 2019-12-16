@@ -1,10 +1,9 @@
 package main.java.com.herosAndVillains.views.heroes;
 
-import main.java.com.herosAndVillains.controllers.Controller;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-
 import main.java.com.herosAndVillains.controllers.ClientSocketControllerForHeroes;
+import main.java.com.herosAndVillains.controllers.Controller;
 import main.java.com.herosAndVillains.views.MyGUI;
 
 /**

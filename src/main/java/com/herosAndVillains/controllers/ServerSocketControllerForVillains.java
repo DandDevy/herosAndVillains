@@ -22,10 +22,22 @@ public class ServerSocketControllerForVillains {
         }
 
         MySerializerController.serializeObject(villain, FOLDER + getBattleFileNumberUpdated() + SER_fILE_ENDING);
-        System.out.println("controller.addVillain: "+ villain + " has been serialized");
+        System.out.println("ServerSocketControllerForVillains.addVillain: "+ villain + " has been serialized");
         ServerSocketSingleton serverSocket = ServerSocketSingleton.getInstance();
         serverSocket.openSocket();
+
         serverSocket.writeObject(villain);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        serverSocket.writeObject(villain);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         serverSocket.closeSocket();
         serverSocket.closeServer();
     }
@@ -42,6 +54,5 @@ public class ServerSocketControllerForVillains {
     }
 
     public static void closeAll() {
-
     }
 }
