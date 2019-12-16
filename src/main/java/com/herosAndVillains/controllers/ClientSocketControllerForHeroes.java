@@ -1,5 +1,6 @@
 package main.java.com.herosAndVillains.controllers;
 
+import main.java.com.herosAndVillains.models.sockets.Client;
 import main.java.com.herosAndVillains.models.sockets.ClientSocket;
 import main.java.com.herosAndVillains.models.sockets.ServerSocketSingleton;
 
@@ -10,6 +11,11 @@ import java.io.ObjectInputStream;
 public class ClientSocketControllerForHeroes {
     public static void addHero(String heroType, String text) {
 
+    }
+
+    public static void observe(){
+        Client client = new Client();
+        new Thread(client).start();
     }
 
     public static void observe(int delay) {

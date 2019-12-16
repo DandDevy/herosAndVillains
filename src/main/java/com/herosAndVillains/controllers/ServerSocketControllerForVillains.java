@@ -3,7 +3,7 @@ package main.java.com.herosAndVillains.controllers;
 import main.java.com.herosAndVillains.models.factories.villainFactories.BadFlyPersonFactory;
 import main.java.com.herosAndVillains.models.factories.villainFactories.BadStrongManFactory;
 import main.java.com.herosAndVillains.models.people.villains.SuperVillain;
-import main.java.com.herosAndVillains.models.sockets.ServerSocketSingleton;
+import main.java.com.herosAndVillains.models.sockets.Server;
 
 public class ServerSocketControllerForVillains {
 
@@ -23,23 +23,28 @@ public class ServerSocketControllerForVillains {
 
         MySerializerController.serializeObject(villain, FOLDER + getBattleFileNumberUpdated() + SER_fILE_ENDING);
         System.out.println("ServerSocketControllerForVillains.addVillain: "+ villain + " has been serialized");
-        ServerSocketSingleton serverSocket = ServerSocketSingleton.getInstance();
-        serverSocket.openSocket();
 
-        serverSocket.writeObject(villain);
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        serverSocket.writeObject(villain);
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        serverSocket.closeSocket();
-        serverSocket.closeServer();
+        Server server = Server.getInstance();
+        new Thread(server).start();
+
+
+//        ServerSocketSingleton serverSocket = ServerSocketSingleton.getInstance();
+//        serverSocket.openSocket();
+//
+//        serverSocket.writeObject(villain);
+//        try {
+//            Thread.sleep(4000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        serverSocket.writeObject(villain);
+//        try {
+//            Thread.sleep(4000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        serverSocket.closeSocket();
+//        serverSocket.closeServer();
     }
     public static synchronized int getBattleFileNumberUpdated(){
         return battleFileNumber++;

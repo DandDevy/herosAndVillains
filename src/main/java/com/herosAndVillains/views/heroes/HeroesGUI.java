@@ -63,7 +63,8 @@ public class HeroesGUI extends MyGUI {
             if(!useSockets)
                 Controller.observe(super.getDelay());
             else
-                ClientSocketControllerForHeroes.observe(super.getDelay());
+                ClientSocketControllerForHeroes.observe();
+//                ClientSocketControllerForHeroes.observe(super.getDelay());
         });
 
         super.getStopMyThreads().setOnAction(event -> {
