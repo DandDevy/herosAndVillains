@@ -24,8 +24,8 @@ public class ServerSocketControllerForVillains {
         } else if(type.equals("Fly")){
             villain = new BadFlyPersonFactory().getVillain(strength);
         }
-
-        MySerializerController.serializeObject(villain, FOLDER + getBattleFileNumberUpdated() + SER_fILE_ENDING);
+        String location = FOLDER + getBattleFileNumberUpdated() + SER_fILE_ENDING;
+        MySerializerController.serializeObject(villain, location);
         System.out.println("ServerSocketControllerForVillains.addVillain: "+ villain + " has been serialized");
 
         Server server = Server.getInstance();

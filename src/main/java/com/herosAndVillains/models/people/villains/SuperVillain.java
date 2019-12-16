@@ -18,6 +18,7 @@ public class SuperVillain implements Observable, Serializable, SuperPerson {
     private String strength;
     private List<Observer> observerList;
     private Path path;
+    private String pathAsString;
 
     /**
      * <p>You need strength for a villain</p>
@@ -86,5 +87,13 @@ public class SuperVillain implements Observable, Serializable, SuperPerson {
      */
     public void setPath(Path path) {
         this.path = path;
+    }
+
+    public String getPathAsString() {
+        return pathAsString;
+    }
+
+    public void setPathAsString(String pathAsString) {
+        this.pathAsString = pathAsString;
     }
 }

@@ -222,10 +222,11 @@ public class Controller {
      * @return
      */
     public static SuperVillain getVillainWithFullPath(Path eventpath) {
-        System.out.println("Controller.getVillain: SERIALIZATION_LOCATION + eventpath.toString():  " + SERIALIZATION_LOCATION + eventpath.toString());
+        System.out.println("Controller.getVillain: SERIALIZATION_LOCATION + eventpath.toString():  " + eventpath.toString());
         SuperVillain superVillain = null;
         try {
             superVillain = (SuperVillain) MySerializerController.deSerializeObject(eventpath.toString());
+            superVillain.setPathAsString(eventpath.toString());
         } catch (Exception e){
             if(e instanceof ClassCastException)
                 System.out.println("THAT WAS HERO");
@@ -283,6 +284,22 @@ public class Controller {
     public static void destroyVillain(Path eventpath) {
      // destroy file SERIALIZATION_LOCATION + eventpath.toString()
         File fileToDestroy = new File(SERIALIZATION_LOCATION + eventpath.toString());
+        if(fileToDestroy.delete())
+        {
+            System.out.println("File deleted successfully");
+        }
+        else
+        {
+            System.out.println("Failed to delete the file");
+        }
+    }
+    /**
+     * <p>destroys villain file.</p>
+     * @param eventpath
+     */
+    public static void destroyVillainWithFullPath(Path eventpath) {
+        // destroy file SERIALIZATION_LOCATION + eventpath.toString()
+        File fileToDestroy = new File(eventpath.toString());
         if(fileToDestroy.delete())
         {
             System.out.println("File deleted successfully");
