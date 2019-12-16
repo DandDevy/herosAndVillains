@@ -101,6 +101,13 @@ public class Server implements Runnable{
                             ObjectOutputStream outputToClient = new ObjectOutputStream(socket.getOutputStream());
                             System.out.println("writing back");
                             outputToClient.writeObject(resultingObject);
+
+                            // Read from input
+                            Object secondObject = null;
+                            while (secondObject == null){
+                                secondObject = inputFromClient.readObject();
+                            }
+                            ServerController.lookup(secondObject);
                         }
                     }
 

@@ -21,7 +21,8 @@ public class ServerController {
                 object = (Object) getVillain();
             }
         } else if (object instanceof ArrayList){
-            ArrayList<SuperPerson> resultingSuperPeople = null;
+            ArrayList<SuperPerson> resultingSuperPeople = (ArrayList) object;
+            System.out.println("ServerController: resultingSuperPeople" + resultingSuperPeople);
         }
 
 

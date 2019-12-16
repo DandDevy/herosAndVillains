@@ -1,9 +1,12 @@
 package main.java.com.herosAndVillains.models.sockets;
 
+import main.java.com.herosAndVillains.controllers.ClientController;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Client implements Runnable{
     private static final String HOST = "localhost";
@@ -46,9 +49,10 @@ public class Client implements Runnable{
             while (object == null){
                 ObjectInputStream fromServer = new ObjectInputStream(socket.getInputStream());
                 object = fromServer.readObject();
-
             }
             System.out.println("object = "+object);
+            ArrayList arrayList = ClientController.lookup(object);
+            toServer.writeObject(arrayList);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
