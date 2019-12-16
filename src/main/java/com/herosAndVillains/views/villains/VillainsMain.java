@@ -21,7 +21,7 @@ public class VillainsMain extends Application {
 //        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle(TITLE);
         primaryStage.setScene(new Scene(
-                new VillainsGUI(USE_SOCKETS).getPrimaryLayout(),
+                new VillainsGUI(USE_SOCKETS,primaryStage).getPrimaryLayout(),
                 WIDTH, HEIGHT
         ));
         primaryStage.show();

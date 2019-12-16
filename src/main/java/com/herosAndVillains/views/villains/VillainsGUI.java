@@ -1,5 +1,6 @@
 package main.java.com.herosAndVillains.views.villains;
 
+import javafx.stage.Stage;
 import main.java.com.herosAndVillains.controllers.ServerSocketControllerForVillains;
 import main.java.com.herosAndVillains.controllers.Controller;
 import javafx.scene.control.Button;
@@ -25,13 +26,15 @@ public class VillainsGUI extends MyGUI {
     private static final String STOP_ALL_GENERATIONS = "Stop all generations";
     private static final String CLOSE_ALL_TEXT = "Close everything (server)";
     private Button addHeroBtn, observingDelayBtn;
+    private Stage stage;
 
-    public VillainsGUI(boolean useSockets) {
+    public VillainsGUI(boolean useSockets, Stage stage) {
         super(
                 ENTER_YOUR_VILLAIN_TYPE, STRONG_VILLAIN, FLYING_VILLAIN, ENTER_YOUR_VILLAIN_STRENGTH, COLOUR,
                 ENTER_YOUR_DELAY_OF_GENERATING, ADD_PERSON_BTN_TEXT,
                 DELAY_BTN_TEXT, DEFAULT_DELAY,
                 STOP_ALL_GENERATIONS, CLOSE_ALL_TEXT);
+        this.stage = stage;
         setButtons(useSockets);
     }
 
@@ -84,6 +87,8 @@ public class VillainsGUI extends MyGUI {
             System.out.println("close everything (socket server!)");
             if(useSockets)
                 ServerSocketControllerForVillains.closeAll();
+
+            stage.close();
         });
     }
 

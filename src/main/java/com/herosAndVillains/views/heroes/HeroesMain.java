@@ -26,7 +26,7 @@ public class HeroesMain extends Application {
 //                .getPrimaryLayout(), WIDTH, HEIGHT));
 
         primaryStage.setScene(new Scene(
-                new HeroesGUI(USE_SOCKETS).getPrimaryLayout(),
+                new HeroesGUI(USE_SOCKETS, primaryStage).getPrimaryLayout(),
                 WIDTH, HEIGHT
         ));
         primaryStage.show();

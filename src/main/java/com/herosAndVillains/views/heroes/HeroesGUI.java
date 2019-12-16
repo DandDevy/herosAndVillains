@@ -2,6 +2,7 @@ package main.java.com.herosAndVillains.views.heroes;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import main.java.com.herosAndVillains.controllers.ClientSocketControllerForHeroes;
 import main.java.com.herosAndVillains.controllers.Controller;
 import main.java.com.herosAndVillains.views.MyGUI;
@@ -25,13 +26,15 @@ public class HeroesGUI extends MyGUI {
     private static final String STOP_ALL_OBSERVATIONS = "Stop all observations";
     private static final String CLOSE_ALL_TEXT = "close everything";
     private Button addHeroBtn, observingDelayBtn;
+    private Stage primaryStage;
 
-    public HeroesGUI(boolean useSockets) {
+    public HeroesGUI(boolean useSockets, Stage primaryStage) {
         super(
                 ENTER_YOUR_HERO_TYPE,STONG_HERO, FLY_HERO, ENTER_YOUR_HERO_STRENGTH, COLOUR,
                 ENTER_YOUR_DELAY_OF_OBSERVING, ADD_PERSON_BTN_TEXT,
                 DELAY_BTN_TEXT, DEFAULT_DELAY,
                 STOP_ALL_OBSERVATIONS,CLOSE_ALL_TEXT);
+        this.primaryStage = primaryStage;
         setButtons(useSockets);
     }
 
@@ -80,6 +83,8 @@ public class HeroesGUI extends MyGUI {
             if(useSockets){
                 ClientSocketControllerForHeroes.closeAll();
             }
+
+            primaryStage.close();
         });
     }
 

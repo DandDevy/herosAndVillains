@@ -19,7 +19,7 @@ public class HeroesAndVillainsMain extends Application {
         //first stage for heroes
         heroStage.setTitle(HEROES_TITLE);
         heroStage.setScene(new Scene(
-                new HeroesGUI(USE_SOCKETS).getPrimaryLayout(),
+                new HeroesGUI(USE_SOCKETS,heroStage).getPrimaryLayout(),
                 WIDTH, HEIGHT
         ));
         heroStage.show();
@@ -28,7 +28,7 @@ public class HeroesAndVillainsMain extends Application {
         Stage villainStage = new Stage();
         villainStage.setTitle(VILLAINS_TITLE);
         villainStage.setScene(new Scene(
-                new VillainsGUI(USE_SOCKETS).getPrimaryLayout(),
+                new VillainsGUI(USE_SOCKETS,villainStage).getPrimaryLayout(),
                 WIDTH, HEIGHT
         ));
         villainStage.show();
