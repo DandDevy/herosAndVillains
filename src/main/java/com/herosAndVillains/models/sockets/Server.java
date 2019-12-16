@@ -1,7 +1,6 @@
 package main.java.com.herosAndVillains.models.sockets;
 
 import main.java.com.herosAndVillains.controllers.ServerController;
-import main.java.com.herosAndVillains.models.people.villains.SuperVillain;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -96,11 +95,12 @@ public class Server implements Runnable{
 
                     // Write to the file
                     if(object != null) {
-                        SuperVillain resultingSuperVillain = ServerController.lookup(object);
-                        if(resultingSuperVillain != null) {
+//                        ArrayList<SuperPerson> resultingSuperPeople = ServerController.lookup(object);
+                        Object resultingObject = ServerController.lookup(object);
+                        if(resultingObject != null) {
                             ObjectOutputStream outputToClient = new ObjectOutputStream(socket.getOutputStream());
                             System.out.println("writing back");
-                            outputToClient.writeObject(resultingSuperVillain);
+                            outputToClient.writeObject(resultingObject);
                         }
                     }
 

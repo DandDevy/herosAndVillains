@@ -216,6 +216,26 @@ public class Controller {
         return superVillain;
     }
 
+    /**
+     * <p>get villain from common folder</p>
+     * @param eventpath
+     * @return
+     */
+    public static SuperVillain getVillainWithFullPath(Path eventpath) {
+        System.out.println("Controller.getVillain: SERIALIZATION_LOCATION + eventpath.toString():  " + SERIALIZATION_LOCATION + eventpath.toString());
+        SuperVillain superVillain = null;
+        try {
+            superVillain = (SuperVillain) MySerializerController.deSerializeObject(eventpath.toString());
+        } catch (Exception e){
+            if(e instanceof ClassCastException)
+                System.out.println("THAT WAS HERO");
+            else
+                e.printStackTrace();
+        }
+
+        return superVillain;
+    }
+
 
     /**
      * <p>handle a villain when is found in the common folder</p>
