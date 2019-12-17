@@ -1,6 +1,6 @@
 package main.java.com.herosAndVillains.models.sockets;
 
-import main.java.com.herosAndVillains.controllers.ClientController;
+import main.java.com.herosAndVillains.controllers.socketControllers.ClientController;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

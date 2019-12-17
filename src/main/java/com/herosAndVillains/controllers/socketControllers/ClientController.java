@@ -1,5 +1,6 @@
-package main.java.com.herosAndVillains.controllers;
+package main.java.com.herosAndVillains.controllers.socketControllers;
 
+import main.java.com.herosAndVillains.controllers.Controller;
 import main.java.com.herosAndVillains.models.people.SuperPerson;
 import main.java.com.herosAndVillains.models.people.heroes.SuperHero;
 import main.java.com.herosAndVillains.models.people.villains.SuperVillain;

@@ -1,5 +1,6 @@
-package main.java.com.herosAndVillains.controllers;
+package main.java.com.herosAndVillains.controllers.socketControllers;
 
+import main.java.com.herosAndVillains.controllers.MySerializerController;
 import main.java.com.herosAndVillains.models.factories.villainFactories.BadFlyPersonFactory;
 import main.java.com.herosAndVillains.models.factories.villainFactories.BadStrongManFactory;
 import main.java.com.herosAndVillains.models.people.villains.SuperVillain;

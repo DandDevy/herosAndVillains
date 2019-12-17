@@ -13,7 +13,8 @@ public class HeroesMain extends Application {
     private static final int WIDTH = 500;
     private static final int HEIGHT = 180;
     private static final String TITLE = "HEROES - Daniel Ashcroft";
-    private static final boolean USE_SOCKETS = true;
+    private static final boolean USE_SOCKETS = false;
+    private static final boolean USE_RMI = true;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -26,7 +27,7 @@ public class HeroesMain extends Application {
 //                .getPrimaryLayout(), WIDTH, HEIGHT));
 
         primaryStage.setScene(new Scene(
-                new HeroesGUI(USE_SOCKETS, primaryStage).getPrimaryLayout(),
+                new HeroesGUI(USE_SOCKETS,USE_RMI, primaryStage).getPrimaryLayout(),
                 WIDTH, HEIGHT
         ));
         primaryStage.show();

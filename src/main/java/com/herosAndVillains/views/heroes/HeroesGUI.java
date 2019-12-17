@@ -3,7 +3,8 @@ package main.java.com.herosAndVillains.views.heroes;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import main.java.com.herosAndVillains.controllers.ClientSocketControllerForHeroes;
+import main.java.com.herosAndVillains.controllers.RMIControllers.RMIClientController;
+import main.java.com.herosAndVillains.controllers.socketControllers.ClientSocketControllerForHeroes;
 import main.java.com.herosAndVillains.controllers.Controller;
 import main.java.com.herosAndVillains.views.MyGUI;
 
@@ -28,21 +29,21 @@ public class HeroesGUI extends MyGUI {
     private Button addHeroBtn, observingDelayBtn;
     private Stage primaryStage;
 
-    public HeroesGUI(boolean useSockets, Stage primaryStage) {
+    public HeroesGUI(boolean useSockets, boolean useRMI, Stage primaryStage) {
         super(
                 ENTER_YOUR_HERO_TYPE,STONG_HERO, FLY_HERO, ENTER_YOUR_HERO_STRENGTH, COLOUR,
                 ENTER_YOUR_DELAY_OF_OBSERVING, ADD_PERSON_BTN_TEXT,
                 DELAY_BTN_TEXT, DEFAULT_DELAY,
                 STOP_ALL_OBSERVATIONS,CLOSE_ALL_TEXT);
         this.primaryStage = primaryStage;
-        setButtons(useSockets);
+        setButtons(useSockets, useRMI);
     }
 
     public HBox getPrimaryLayout(){
         return super.getPrimaryLayout();
     }
 
-    private void setButtons(boolean useSockets){
+    private void setButtons(boolean useSockets, boolean useRMI){
         super.getAddSuperPersonBtn().setOnAction(event -> {
 
             System.out.println("User wishes to add a user!!");
@@ -54,34 +55,49 @@ public class HeroesGUI extends MyGUI {
                 heroType = "Fly";
             }
             if(!useSockets)
-                Controller.addHero(heroType, super.getAddSuperPersonStrengthTF().getText());
-            else
+                if(useRMI)
+                    RMIClientController.addHero(heroType, super.getAddSuperPersonStrengthTF().getText());
+                else
+                    Controller.addHero(heroType, super.getAddSuperPersonStrengthTF().getText());
+            else {
                 ClientSocketControllerForHeroes.addHero(heroType, super.getAddSuperPersonStrengthTF().getText());
-
+            }
 
         });
 
         super.getDelayBtn().setOnAction(event -> {
             System.out.println("User wishes to observe at " + super.getDelay() + " seconds");
             if(!useSockets)
-                Controller.observe(super.getDelay());
-            else
+                if(useRMI){
+                    RMIClientController.observe();
+                } else
+                    Controller.observe(super.getDelay());
+            else {
                 ClientSocketControllerForHeroes.observe();
 //                ClientSocketControllerForHeroes.observe(super.getDelay());
+            }
         });
 
         super.getStopMyThreads().setOnAction(event -> {
             System.out.println("User wishes stop all observations");
-            if(!useSockets)
-                Controller.stopObservations();
-            else
+            if(!useSockets) {
+                if(useRMI)
+                    RMIClientController.stopObservations();
+                else
+                    Controller.stopObservations();
+            }else{
                 ClientSocketControllerForHeroes.stopObservations();
+            }
+
         });
 
         super.getClose().setOnAction(event -> {
             System.out.println("close everything (socket server!)");
             if(useSockets){
                 ClientSocketControllerForHeroes.closeAll();
+            } else {
+                if (useRMI)
+                    RMIClientController.closeAll();
             }
 
             primaryStage.close();

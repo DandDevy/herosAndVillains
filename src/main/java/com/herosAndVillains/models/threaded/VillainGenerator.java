@@ -1,7 +1,7 @@
 package main.java.com.herosAndVillains.models.threaded;
 
 import main.java.com.herosAndVillains.controllers.Controller;
-import main.java.com.herosAndVillains.controllers.ServerSocketControllerForVillains;
+import main.java.com.herosAndVillains.controllers.socketControllers.ServerSocketControllerForVillains;
 
 import java.util.concurrent.TimeUnit;
 

@@ -13,7 +13,8 @@ public class VillainsMain extends Application {
     private static final int WIDTH = 500;
     private static final int HEIGHT = 180;
     private static final String TITLE = "VILLAINS - Daniel Ashcroft";
-    private static final boolean USE_SOCKETS = true;
+    private static final boolean USE_SOCKETS = false;
+    private static final boolean USE_RMI = true;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -21,7 +22,7 @@ public class VillainsMain extends Application {
 //        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle(TITLE);
         primaryStage.setScene(new Scene(
-                new VillainsGUI(USE_SOCKETS,primaryStage).getPrimaryLayout(),
+                new VillainsGUI(USE_SOCKETS,USE_RMI,primaryStage).getPrimaryLayout(),
                 WIDTH, HEIGHT
         ));
         primaryStage.show();

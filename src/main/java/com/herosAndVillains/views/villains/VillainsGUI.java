@@ -1,7 +1,8 @@
 package main.java.com.herosAndVillains.views.villains;
 
 import javafx.stage.Stage;
-import main.java.com.herosAndVillains.controllers.ServerSocketControllerForVillains;
+import main.java.com.herosAndVillains.controllers.RMIControllers.RMIServerController;
+import main.java.com.herosAndVillains.controllers.socketControllers.ServerSocketControllerForVillains;
 import main.java.com.herosAndVillains.controllers.Controller;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -28,21 +29,21 @@ public class VillainsGUI extends MyGUI {
     private Button addHeroBtn, observingDelayBtn;
     private Stage stage;
 
-    public VillainsGUI(boolean useSockets, Stage stage) {
+    public VillainsGUI(boolean useSockets,boolean useRMI, Stage stage) {
         super(
                 ENTER_YOUR_VILLAIN_TYPE, STRONG_VILLAIN, FLYING_VILLAIN, ENTER_YOUR_VILLAIN_STRENGTH, COLOUR,
                 ENTER_YOUR_DELAY_OF_GENERATING, ADD_PERSON_BTN_TEXT,
                 DELAY_BTN_TEXT, DEFAULT_DELAY,
                 STOP_ALL_GENERATIONS, CLOSE_ALL_TEXT);
         this.stage = stage;
-        setButtons(useSockets);
+        setButtons(useSockets, useRMI);
     }
 
     public HBox getPrimaryLayout(){
         return super.getPrimaryLayout();
     }
 
-    private void setButtons(boolean useSockets){
+    private void setButtons(boolean useSockets, boolean useRMI){
         super.getAddSuperPersonBtn().setOnAction(event -> {
             System.out.println("User wishes to add a user!!");
 
@@ -52,10 +53,16 @@ public class VillainsGUI extends MyGUI {
             }else {
                 villainType = "Fly";
             }
-            if(!useSockets)
-                Controller.addVillain(villainType, super.getAddSuperPersonStrengthTF().getText());
-            else
-                ServerSocketControllerForVillains.addVillain(villainType, super.getAddSuperPersonStrengthTF().getText());
+
+            if(useRMI){
+                RMIServerController.addVillain(villainType, super.getAddSuperPersonStrengthTF().getText());
+            }else {
+                if(!useSockets)
+                    Controller.addVillain(villainType, super.getAddSuperPersonStrengthTF().getText());
+                else
+                    ServerSocketControllerForVillains.addVillain(villainType, super.getAddSuperPersonStrengthTF().getText());
+            }
+
 
         });
 
@@ -68,25 +75,41 @@ public class VillainsGUI extends MyGUI {
             }
             System.out.println("User wishes to generate at " + super.getDelay() + " seconds");
 
-            if(!useSockets)
-                Controller.generateVillain(super.getDelay(),villainType, super.getAddSuperPersonStrengthTF().getText());
-            else
-                ServerSocketControllerForVillains.generateVillain(super.getDelay(),villainType, super.getAddSuperPersonStrengthTF().getText());
+            if(useRMI){
+                RMIServerController.generateVillain(super.getDelay(),villainType, super.getAddSuperPersonStrengthTF().getText());
+            }else {
+                if(!useSockets)
+                    Controller.generateVillain(super.getDelay(),villainType, super.getAddSuperPersonStrengthTF().getText());
+                else
+                    ServerSocketControllerForVillains.generateVillain(super.getDelay(),villainType, super.getAddSuperPersonStrengthTF().getText());
+            }
+
         });
 
         super.getStopMyThreads().setOnAction(event -> {
             System.out.println("STOP MY GENERATIONS");
-            if(!useSockets)
-                Controller.stopGenerations();
-            else
-                ServerSocketControllerForVillains.stopGenerations();
+            if(useRMI){
+                RMIServerController.stopGenerations();
+            }else {
+                if(!useSockets)
+                    Controller.stopGenerations();
+                else
+                    ServerSocketControllerForVillains.stopGenerations();
+            }
+
         });
 
         super.getClose().setOnAction(event -> {
 
             System.out.println("close everything (socket server!)");
-            if(useSockets)
-                ServerSocketControllerForVillains.closeAll();
+
+            if(useRMI){
+                RMIServerController.closeAll();
+            }else {
+                if(useSockets)
+                    ServerSocketControllerForVillains.closeAll();
+            }
+
 
             stage.close();
         });

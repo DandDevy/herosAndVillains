@@ -1,4 +1,4 @@
-package main.java.com.herosAndVillains.controllers;
+package main.java.com.herosAndVillains.controllers.socketControllers;
 
 import main.java.com.herosAndVillains.models.sockets.Client;
 import main.java.com.herosAndVillains.models.sockets.ClientSocket;
