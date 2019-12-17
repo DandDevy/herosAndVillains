@@ -1,6 +1,7 @@
 package main.java.com.herosAndVillains.models.rmi.server;
 
 
+import main.java.com.herosAndVillains.models.rmi.server.services.ArrayListServant;
 import main.java.com.herosAndVillains.models.rmi.server.services.HelloServant;
 import main.java.com.herosAndVillains.models.rmi.server.services.ObservableServant;
 
@@ -27,9 +28,14 @@ public class RMIServer {
     private RMIServer() throws RemoteException {
         System.out.println("starting RMI server ...");
         Registry registry = LocateRegistry.createRegistry(5099);
+
         registry.rebind("hello", new HelloServant());
+
         observableServant = new ObservableServant();
         registry.rebind("observe",observableServant);
+
+        registry.rebind("arraylist", new ArrayListServant());
+
         System.out.println("server ready ...");
     }
 
