@@ -2,6 +2,7 @@ package main.java.com.herosAndVillains.models.rmi.server;
 
 
 import main.java.com.herosAndVillains.models.rmi.server.services.HelloServant;
+import main.java.com.herosAndVillains.models.rmi.server.services.ObservableServant;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -23,5 +24,7 @@ public class RMIServer {
         System.out.println("starting RMI server ...");
         Registry registry = LocateRegistry.createRegistry(5099);
         registry.rebind("hello", new HelloServant());
+        registry.rebind("observe", new ObservableServant());
+        System.out.println("server ready ...");
     }
 }

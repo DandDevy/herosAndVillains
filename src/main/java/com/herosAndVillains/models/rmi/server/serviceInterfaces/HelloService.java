@@ -1,4 +1,4 @@
-package main.java.com.herosAndVillains.models.rmi.server.services;
+package main.java.com.herosAndVillains.models.rmi.server.serviceInterfaces;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

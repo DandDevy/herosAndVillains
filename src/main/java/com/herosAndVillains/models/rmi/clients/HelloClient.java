@@ -1,7 +1,7 @@
 package main.java.com.herosAndVillains.models.rmi.clients;
 
 
-import main.java.com.herosAndVillains.models.rmi.server.services.HelloService;
+import main.java.com.herosAndVillains.models.rmi.server.serviceInterfaces.HelloService;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;

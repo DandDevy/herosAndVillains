@@ -1,5 +1,7 @@
 package main.java.com.herosAndVillains.models.rmi.server.services;
 
+import main.java.com.herosAndVillains.models.rmi.server.serviceInterfaces.HelloService;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 

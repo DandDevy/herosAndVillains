@@ -1,6 +1,7 @@
 package main.java.com.herosAndVillains.controllers.RMIControllers;
 
 import main.java.com.herosAndVillains.models.rmi.clients.HelloClient;
+import main.java.com.herosAndVillains.models.rmi.clients.ObserverClient;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -16,6 +17,7 @@ public class RMIClientController {
         System.out.println("RMIClientController : observe");
         try {
             new HelloClient();
+            new ObserverClient();
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {
