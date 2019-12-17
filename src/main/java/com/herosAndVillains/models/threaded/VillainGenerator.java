@@ -1,6 +1,7 @@
 package main.java.com.herosAndVillains.models.threaded;
 
 import main.java.com.herosAndVillains.controllers.Controller;
+import main.java.com.herosAndVillains.controllers.RMIControllers.RMIServerController;
 import main.java.com.herosAndVillains.controllers.socketControllers.ServerSocketControllerForVillains;
 
 import java.util.concurrent.TimeUnit;
@@ -14,7 +15,8 @@ public class VillainGenerator implements Runnable {
     private int delay;
     private String type, strength;
     private boolean keepRunning = true;
-    private  boolean useSockets;
+    private  boolean useSockets = false;
+    private  boolean useRMI = false;
 
     /**
      * <p>VillainGenerator constructor will take a delay for the villain generation, a type for the villain and strength for it.</p>
@@ -35,12 +37,13 @@ public class VillainGenerator implements Runnable {
      * @param strength
      * @param useSockets
      */
-    public VillainGenerator(int delay, String type, String strength , boolean useSockets) {
+    public VillainGenerator(int delay, String type, String strength , boolean useSockets, boolean useRMI) {
         this.delay = delay;
         this.type = type;
         this.strength = strength;
         this.keepRunning = keepRunning;
         this.useSockets = useSockets;
+        this.useRMI = useRMI;
     }
 
     /**
@@ -49,10 +52,12 @@ public class VillainGenerator implements Runnable {
     @Override
     public void run() {
         while (keepRunning){
-            if(!useSockets)
-                Controller.addVillain(type, strength);
-            else
+            if(useSockets)
                 ServerSocketControllerForVillains.addVillain(type,strength);
+            else if(useRMI)
+                RMIServerController.addVillain(type,strength);
+            else
+                Controller.addVillain(type, strength);
             try {
                 TimeUnit.SECONDS.sleep(delay);
             } catch (InterruptedException e) {

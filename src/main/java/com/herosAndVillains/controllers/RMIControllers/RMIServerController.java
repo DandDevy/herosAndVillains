@@ -64,13 +64,20 @@ public class RMIServerController {
 
     public static void generateVillain(int delay, String villainType, String strength) {
         System.out.println("RMIServerController : generateVillain");
+
+        VillainGenerator villainGenerator = new VillainGenerator(delay,villainType, strength,false,true);
+        villainGenerators.add(villainGenerator);
+        new Thread(villainGenerator).start();
     }
 
     public static void stopGenerations() {
         System.out.println("RMIServerController : stopGenerations");
+        villainGenerators.forEach(villainGenerator -> villainGenerator.terminate());
+        villainGenerators.clear();
     }
 
     public static void closeAll() {
         System.out.println("RMIServerController : closeAll");
+        stopGenerations();
     }
 }

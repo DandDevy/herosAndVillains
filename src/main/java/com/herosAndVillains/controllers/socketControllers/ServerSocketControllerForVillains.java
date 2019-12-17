@@ -56,7 +56,7 @@ public class ServerSocketControllerForVillains {
     }
 
     public static void generateVillain(int delay, String villainType, String strength) {
-        VillainGenerator villainGenerator = new VillainGenerator(delay,villainType, strength,true);
+        VillainGenerator villainGenerator = new VillainGenerator(delay,villainType, strength,true,false);
         villainGenerators.add(villainGenerator);
         new Thread(villainGenerator).start();
     }

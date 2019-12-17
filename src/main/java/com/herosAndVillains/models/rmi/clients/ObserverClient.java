@@ -16,7 +16,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class ObserverClient extends UnicastRemoteObject implements RMIObserver, Serializable {
+public class ObserverClient extends UnicastRemoteObject implements RMIObserver, Serializable, Runnable {
     public ObserverClient() throws RemoteException, NotBoundException, MalformedURLException {
         super();
         ObservableService observableService = (ObservableService) Naming.lookup("rmi://localhost:5099/observe");
@@ -45,5 +45,10 @@ public class ObserverClient extends UnicastRemoteObject implements RMIObserver, 
             }
 
         }
+    }
+
+    @Override
+    public void run() {
+
     }
 }
