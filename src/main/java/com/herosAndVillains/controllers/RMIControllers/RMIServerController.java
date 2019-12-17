@@ -28,6 +28,7 @@ public class RMIServerController {
             villain = new BadFlyPersonFactory().getVillain(strength);
         }
         String location = FOLDER + getBattleFileNumberUpdated() + SER_fILE_ENDING;
+        villain.setPathAsString(location);
         MySerializerController.serializeObject(villain, location);
         System.out.println("RMIServerController : addVillain: "+ villain + " has been serialized");
 
