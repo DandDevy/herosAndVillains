@@ -52,7 +52,7 @@ public class ServerController {
         return battleFileNumber++;
     }
 
-    private static SuperVillain getVillain(){
+    public static SuperVillain getVillain(){
         SuperVillain resultingSuperVillain =null;
         // gets a file
         File folder = new File(SERIALIZATION_LOCATION);

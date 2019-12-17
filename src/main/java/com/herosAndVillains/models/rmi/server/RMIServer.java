@@ -12,6 +12,10 @@ public class RMIServer {
     private static boolean createdServer = false;
     private static RMIServer rmiServer;
 
+
+
+    private ObservableServant observableServant;
+
     public static RMIServer getInstance() throws RemoteException {
         if(!createdServer){
             createdServer = true;
@@ -24,7 +28,12 @@ public class RMIServer {
         System.out.println("starting RMI server ...");
         Registry registry = LocateRegistry.createRegistry(5099);
         registry.rebind("hello", new HelloServant());
-        registry.rebind("observe", new ObservableServant());
+        observableServant = new ObservableServant();
+        registry.rebind("observe",observableServant);
         System.out.println("server ready ...");
+    }
+
+    public ObservableServant getObservableServant() {
+        return observableServant;
     }
 }

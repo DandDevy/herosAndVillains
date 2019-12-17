@@ -7,6 +7,7 @@ package main.java.com.herosAndVillains.views.villains;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.java.com.herosAndVillains.models.rmi.server.RMIServer;
 
 public class VillainsMain extends Application {
 
@@ -19,7 +20,8 @@ public class VillainsMain extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"))
+        RMIServer.getInstance();
         primaryStage.setTitle(TITLE);
         primaryStage.setScene(new Scene(
                 new VillainsGUI(USE_SOCKETS,USE_RMI,primaryStage).getPrimaryLayout(),
